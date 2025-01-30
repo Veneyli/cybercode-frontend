@@ -1,0 +1,24 @@
+// @import url(./theme.scss);
+// @import url(./variables.scss);
+// @import url(./mixins.scss);
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+@use "@/app/styles/theme.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background: var(--color-bg);
+  padding: 20px;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+}

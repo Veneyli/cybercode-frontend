@@ -1,0 +1,51 @@
+.circle {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(1000px);
+  animation: scale 3s infinite ease-in-out;
+  width: 1000px;
+  height: 1000px;
+  z-index: -999;
+
+  &:nth-child(1) {
+    top: -100px;
+    left: -300px;
+    background-color: rgba(155, 57, 252, 0.2);
+    animation: scale 13s infinite ease-in-out;
+  }
+
+  &:nth-child(2) {
+    top: 700px;
+    left: -400px;
+    background-color: rgba(0, 118, 255, 0.2);
+    animation: scale 10s infinite ease-in-out;
+  }
+
+  &:nth-child(3) {
+    top: 500px;
+    right: -300px;
+    background-color: rgba(155, 57, 252, 0.2);
+    animation: scale 11s infinite ease-in-out;
+  }
+  &:nth-child(4) {
+    top: -400px;
+    right: -400px;
+    background-color: rgba(0, 118, 255, 0.2);
+    animation: scale3 9s infinite ease-in-out;
+  }
+}
+
+@keyframes scale {
+  0% {
+    width: 1000px;
+    height: 1000px;
+  }
+  50% {
+    width: 1500px;
+    height: 1500px;
+  }
+  100% {
+    width: 1000px;
+    height: 1000px;
+  }
+}

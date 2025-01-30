@@ -1,0 +1,118 @@
+@use "@/app/styles/variables.scss" as vars;
+
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  position: relative;
+
+  &.show {
+    animation: openPanel 1s forwards;
+  }
+
+  &.hide {
+    animation: closePanel 1s forwards;
+  }
+
+  &__header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+@keyframes openPanel {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes closePanel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.sidebar * {
+  transition: opacity 1s ease;
+}
+
+.sidebar.hide * {
+  opacity: 0;
+}
+
+.buttonMenu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+
+  &.showButton {
+    transition: 3s;
+    opacity: 1;
+    visibility: visible;
+    padding: 40px 30px;
+  }
+
+  &.hideButton {
+    padding: 40px 30px;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.navigation {
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  &__title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: lighter;
+    margin-bottom: 16px;
+  }
+  &__details {
+    margin-bottom: 10px;
+    &-title {
+      background-color: rgba(22, 0, 224, 0.1);
+      padding: 15px 20px;
+      list-style-type: none;
+      border-radius: 20px;
+      font-size: 20px;
+    }
+  }
+  &__list {
+    list-style-type: none;
+  }
+
+  &__link {
+    font-size: 18px;
+    padding: 5px 20px;
+    width: 100%;
+    display: block;
+    color: var(--font-color-1);
+    transition: 0.5s;
+    margin: 10px 0;
+    &:hover {
+      opacity: 0.7;
+      transition: 0.5s;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+}

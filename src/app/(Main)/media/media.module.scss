@@ -1,0 +1,25 @@
+.media {
+  color: var(--font-color-1);
+  width: 1320px;
+  display: flex;
+  margin: 30px auto;
+  gap: 30px;
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+  }
+  &__content {
+    width: 100%;
+    &-title {
+      font-weight: lighter;
+      margin-bottom: 10px;
+    }
+  }
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}

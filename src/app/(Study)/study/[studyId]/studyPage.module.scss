@@ -1,0 +1,15 @@
+.study-page {
+  &__title {
+    text-align: center;
+    margin-bottom: 32px;
+    font-weight: lighter;
+  }
+  &__content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  &__description {
+    line-height: 30px;
+  }
+}

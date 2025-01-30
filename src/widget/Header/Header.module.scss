@@ -1,0 +1,159 @@
+@use "@/app/styles/mixins.scss" as mixins;
+
+.header {
+  @include mixins.container($flex: row, $padding: 10px 30px, $border: 50px);
+  max-width: 1320px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  &__logoLink {
+    text-decoration: none;
+  }
+
+  &__menuButton {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 10px;
+    position: relative;
+    z-index: 10;
+
+    & > span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background-color: var(--font-color-1);
+      position: relative;
+      transition: 0.3s ease;
+
+      &:before,
+      &:after {
+        content: "";
+        width: 30px;
+        height: 3px;
+        background-color: var(--font-color-1);
+        position: absolute;
+        transition: 0.3s ease;
+        left: 0;
+      }
+
+      &:before {
+        top: -8px;
+      }
+
+      &:after {
+        top: 8px;
+      }
+    }
+
+    &.open > span {
+      background-color: transparent;
+    }
+
+    &.open > span:before {
+      transform: rotate(45deg);
+      top: 0;
+    }
+
+    &.open > span:after {
+      transform: rotate(-45deg);
+      top: 0;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .header__menuButton {
+      display: block;
+    }
+
+    .header__navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+
+      transform: translateY(-100%);
+      transition: transform 0.6s ease;
+      z-index: 5;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0px 1px 10px 1px var(--color-shadow);
+      z-index: 10;
+      background-color: var(--color-bg);
+      padding: 40px;
+
+      &.active {
+        transform: translateX(0);
+      }
+
+      .navbar__link {
+        font-size: 30px;
+      }
+      .navbar__list {
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.navbar {
+  &__list {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+  }
+
+  &__item {
+    list-style: none;
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+  }
+
+  &__link {
+    color: var(--font-color-1);
+    text-decoration: none;
+
+    @media (max-width: 800px) {
+      padding: 10px;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  &__button {
+    @media (max-width: 800px) {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+}
+.activeLink {
+  position: relative;
+}
+.activeLink::before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: 8px;
+  background-color: rgb(174, 0, 255);
+  left: -10px;
+  border-radius: 50%;
+}

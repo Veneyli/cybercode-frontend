@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /user/
+Disallow: /dashboard/
+Disallow: /profile/
+
+Sitemap: https://https://cybercode.veney.tech//sitemap.xml

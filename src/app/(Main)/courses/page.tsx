@@ -6,7 +6,7 @@ import CoursesFilter from "@/shared/components/CoursesFilter/CoursesFilter";
 
 export const metadata: Metadata = {
   title: "CyberCode: Поиск курсов",
-  description: "Переделать описание",
+  description: "HTML, CSS, изучение, обучение",
 };
 
 export default async function CoursesPage() {
@@ -29,25 +29,30 @@ export default async function CoursesPage() {
   }
 
   if (!coursesData) {
-    return <p>Пост не найден</p>;
   }
   return (
     <div className={styles.courses}>
-      <div className={styles.courses__sidebar}>{/* <CoursesFilter /> */}</div>
+      <div className={styles.courses__sidebar}>
+        {" "}
+        Тут должен быть фильтр, но он еще в разработке{/* <CoursesFilter /> */}
+      </div>
       <div className={styles.courses__content}>
         <h1 className={styles.courses__title}>Каталог</h1>
 
         <div className={styles.courses__list}>
-          {coursesData.map((course) => (
-            <CourseCard
-              key={course.course_id}
-              id={course.course_id}
-              title={course.title}
-              smallDescription={course.small_description}
-              imageUrl={course.image_url }
-              progress={null}
-            />
-          ))}
+          {coursesData && coursesData.length > 0 ? (
+            coursesData.map((course: Course) => (
+              <CourseCard
+                key={course.course_id}
+                id={course.course_id}
+                title={course.title}
+                smallDescription={course.small_description}
+                imageUrl={course.image_url}
+              />
+            ))
+          ) : (
+            <p>Курсы не найдены</p>
+          )}
         </div>
       </div>
     </div>

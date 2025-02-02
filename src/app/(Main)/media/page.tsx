@@ -2,9 +2,15 @@ import Button from "@/shared/ui/Button/Button";
 import MediaCard from "@/shared/components/MediaCard/MediaCard";
 import styles from "./media.module.scss";
 import { format } from "date-fns";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cybercode: Медиа",
+  description: "Курсы it-технологий, онлайн обучение",
+};
 
 export default async function MediaPage() {
-  const API_URL = "http://localhost:4000";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
   let postData = [];
 
   try {
@@ -13,13 +19,11 @@ export default async function MediaPage() {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch post data");
+      throw new Error("Ошибка при получении курсов");
     }
 
     postData = await response.json();
-  } catch (error) {
-    console.error("Ошибка при загрузке данных:", error);
-  }
+  } catch (error) {}
 
   return (
     <div className={styles.media}>

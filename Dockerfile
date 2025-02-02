@@ -22,8 +22,8 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/package.json ./
 COPY --from=build /app/public ./public
-COPY --from=build /app/robots.txt ./robots.txt
-COPY --from=build /app/sitemap.xml ./sitemap.xml
+# COPY --from=build /app/robots.txt ./robots.txt
+# COPY --from=build /app/sitemap.xml ./sitemap.xml
 
 EXPOSE 3000
 

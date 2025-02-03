@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function useCourse(courseId: string | null) {
   const [course, setCourse] = useState<any | null>(null);

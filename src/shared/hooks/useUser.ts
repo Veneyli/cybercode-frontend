@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { apiClient } from "@/shared/utils/apiClient";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const useUser = (userId) => {
   const [user, setUser] = useState(null);

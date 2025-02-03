@@ -17,7 +17,7 @@ interface Post {
 }
 
 export default function MediaItemPage() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const params = useParams();
   const mediaId = params?.mediaId as string;

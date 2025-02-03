@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { apiClient } from "@/shared/utils/apiClient";
 
+const API_URL = process.env.API_URL || "http://localhost:4000";
+
 export const useUser = (userId) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);

@@ -10,14 +10,12 @@ export async function middleware(req) {
   }
 
   try {
-    const response = await fetch(
-      "http://localhost:4000/api/auth/check-session",
-      {
-        headers: {
-          cookie: `connect.sid=${sessionCookie}`,
-        },
-      }
-    );
+    const API_URL = process.env.API_URL || "http://localhost:4000";
+    const response = await fetch(`${API_URL}/api/auth/check-session`, {
+      headers: {
+        cookie: `connect.sid=${sessionCookie}`,
+      },
+    });
 
     if (!response.ok) {
       return NextResponse.redirect(new URL("/login", req.url));

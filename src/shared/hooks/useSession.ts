@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+const API_URL = process.env.API_URL || "http://localhost:4000";
+
 export function useSession() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -7,13 +9,10 @@ export function useSession() {
   useEffect(() => {
     async function checkSession() {
       try {
-        const res = await fetch(
-          "http://localhost:4000/api/auth/check-session",
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const res = await fetch(`${API_URL}/api/auth/check-session`, {
+          method: "GET",
+          credentials: "include",
+        });
 
         if (res.ok) {
           const data = await res.json();

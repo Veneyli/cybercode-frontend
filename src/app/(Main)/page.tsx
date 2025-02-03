@@ -2,7 +2,6 @@ import Image from "next/image";
 import styles from "./index.module.scss";
 import Link from "next/link";
 
-console.log(process.env.NEXT_PUBLIC_API_URL);
 export default function HomePage() {
   return (
     <>
@@ -13,7 +12,6 @@ export default function HomePage() {
               <h1 className={styles.hero__title}>
                 Освойте веб-разработку и начните свою карьеру в IT с CyberCode
               </h1>
-              <h1>{process.env.NEXT_PUBLIC_API_URL}</h1>
               <p className={styles.hero__description}>
                 CyberCode — сайт с бесплатными видеокурсами! Здесь вы найдете
                 всё необходимое для освоения веб-разработки и сможете

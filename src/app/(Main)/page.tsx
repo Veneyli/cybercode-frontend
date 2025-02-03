@@ -1,6 +1,13 @@
 import Image from "next/image";
 import styles from "./index.module.scss";
 import Link from "next/link";
+import Script from "next/script";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CyberCode: Поиск курсов",
+  description: "HTML, CSS, изучение, обучение",
+};
 
 export default function HomePage() {
   return (

@@ -11,6 +11,7 @@ export function useCourse() {
     async function fetchCourses() {
       try {
         const response = await fetch(`${API_URL}/api/courses`, {
+          credentials: "include",
           cache: "no-store",
         });
 

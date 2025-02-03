@@ -16,6 +16,7 @@ export function useModules(courseId: string | null) {
       try {
         setLoading(true);
         const response = await fetch(`${API_URL}/api/module/${courseId}`, {
+          credentials: "include",
           cache: "no-store",
         });
         if (!response.ok) {

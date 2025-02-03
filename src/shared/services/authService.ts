@@ -3,6 +3,7 @@ import { apiClient } from "@/shared/utils/apiClient";
 export const authService = {
   login: async (data: { email: string; password: string }) => {
     return apiClient("/auth/login", {
+      credentials: "include",
       method: "POST",
       body: JSON.stringify(data),
     });
@@ -12,7 +13,10 @@ export const authService = {
   },
 
   logout: async () => {
-    const response = await apiClient("/auth/logout", { method: "POST" });
+    const response = await apiClient("/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
     return response || { message: "Выход выполнен успешно." };
   },
 
@@ -24,6 +28,7 @@ export const authService = {
     confirmPassword: string;
   }) => {
     return apiClient("/auth/register", {
+      credentials: "include",
       method: "POST",
       body: JSON.stringify(data),
     });

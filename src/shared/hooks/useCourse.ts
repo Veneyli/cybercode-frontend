@@ -13,6 +13,7 @@ export function useCourse(courseId: string | null) {
     async function fetchCourse() {
       try {
         const response = await fetch(`${API_URL}/api/courses/${courseId}`, {
+          credentials: "include",
           cache: "no-store",
         });
 

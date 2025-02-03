@@ -15,6 +15,7 @@ export function useLectures(moduleId: string | null) {
       setLoading(true);
       try {
         const response = await fetch(`${API_URL}/api/lecture/${moduleId}`, {
+          credentials: "include",
           cache: "no-store",
         });
 

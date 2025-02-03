@@ -10,7 +10,7 @@ export async function middleware(req) {
   }
 
   try {
-    const API_URL = process.env.API_URL || "http://localhost:4000";
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
     const response = await fetch(`${API_URL}/api/auth/check-session`, {
       headers: {
         cookie: `connect.sid=${sessionCookie}`,

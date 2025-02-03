@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function MediaPage() {
-  const API_URL = process.env.API_URL || "http://localhost:4000";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
   let postData = [];
 
   try {

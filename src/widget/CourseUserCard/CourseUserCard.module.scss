@@ -1,0 +1,71 @@
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+
+.course-card {
+  @include mixins.container();
+  &__header {
+    display: flex;
+    gap: 30px;
+  }
+  &__image {
+    border-radius: 15px;
+  }
+  &__title {
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  &__description {
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 20px;
+  }
+  &__last-lesson {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--color-border);
+  }
+  &__play-icon {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+  }
+  &__lesson-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__progress {
+    margin-bottom: 20px;
+    &-bar {
+      border: 1px solid var(--color-border);
+      height: 20px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      &-fill {
+        height: 100%;
+        background-color: vars.$color-primary;
+        border-radius: 10px;
+      }
+    }
+    &-labels {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__lesson-small {
+    font-size: 16px;
+    color: #666666;
+  }
+  &__lesson-text {
+    font-size: 18px;
+    font-weight: 300;
+  }
+  &__footer {
+    padding: 20px 0;
+    display: flex;
+    justify-content: end;
+  }
+}

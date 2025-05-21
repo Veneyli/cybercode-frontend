@@ -1,0 +1,44 @@
+@use "sass:color";
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+
+.button {
+  position: relative;
+
+  &__panel {
+    padding: 20px;
+    background-color: var(--color-container-block);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 220px;
+    position: absolute;
+    border: 1px solid vars.$color-primary;
+    margin: 5px;
+    right: -100px;
+    z-index: 100000;
+    &-link {
+      color: var(--font-color-1);
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .button {
+    position: relative;
+    & > button,
+    & > a {
+      display: inline-block;
+    }
+    &__panel {
+      position: initial;
+      gap: 20px;
+      align-items: center;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

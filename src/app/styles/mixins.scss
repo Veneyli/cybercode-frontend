@@ -1,0 +1,95 @@
+@use "@/app/styles/variables.scss" as vars;
+@use "sass:color";
+
+@mixin container(
+  $padding: 20px,
+  $border: 20px,
+  $flex: column,
+  $gap: 10px,
+  $shadow: use
+) {
+  padding: $padding;
+  border-radius: $border;
+  background-color: var(--color-container);
+  display: flex;
+  flex-direction: $flex;
+  color: var(--font-color-1);
+  gap: $gap;
+  @if $shadow != none {
+    box-shadow: 0px 1px 10px 1px var(--color-shadow);
+  }
+}
+@mixin containerProfile(
+  $padding: 20px,
+  $border: 20px,
+  $gap: 10px,
+  $shadow: use
+) {
+  padding: $padding;
+  border-radius: $border;
+  background-color: var(--color-container-profile);
+  display: grid;
+  color: var(--font-color-1);
+  gap: $gap;
+  @if $shadow != none {
+    box-shadow: 0px 1px 10px 1px var(--color-shadow);
+  }
+}
+
+@mixin theme-variables($theme) {
+  @each $key, $value in $theme {
+    --#{$key}: #{$value};
+  }
+}
+
+@mixin input-focus($color) {
+  &:focus {
+    outline: none;
+    box-shadow: 0px 1px 3px 3px color.mix($color, transparent, 30%);
+  }
+  &::placeholder {
+    color: $color;
+  }
+
+  &:disabled {
+    background-color: color.mix($color, transparent, 30%);
+    opacity: 0.5;
+  }
+}
+
+@mixin scroll() {
+  scroll-snap-type: x mandatory;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background: color.mix(vars.$color-primary, transparent, 10%);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: vars.$color-primary;
+    border-radius: 50px;
+  }
+
+  @supports (-moz-appearance: none) {
+    scrollbar-width: thin;
+    scrollbar-color: vars.$color-primary
+      color.mix(vars.$color-primary, transparent, 10%);
+  }
+
+  &::-ms-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-ms-thumb {
+    background: vars.$color-primary;
+    border-radius: 10px;
+  }
+}
+
+@mixin title() {
+  font-weight: 400;
+  margin-bottom: 10px;
+}

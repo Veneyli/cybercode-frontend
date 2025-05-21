@@ -1,0 +1,91 @@
+@use "@/app/styles/variables" as vars;
+@use "@/app/styles/mixins" as mixin;
+@use "sass:color";
+
+.wrapper {
+  width: 100%;
+  z-index: 10;
+  flex: 1;
+  // min-height: 110px;
+}
+.inputWrapper {
+  position: relative;
+}
+.label {
+  display: block;
+  margin-bottom: 10px;
+}
+%input {
+  background-color: var(--color-container-block);
+  border-radius: 20px;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: var(--font-color-1);
+  transition: 0.3s;
+}
+
+.small {
+  padding: 7px 15px;
+  font-size: 14px;
+}
+
+.medium {
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+.large {
+  padding: 10px 20px;
+  font-size: 18px;
+}
+
+.normal {
+  @extend %input;
+  border: 2px solid vars.$color-button;
+  @include mixin.input-focus(vars.$color-button);
+}
+.valid {
+  @extend %input;
+  border: 2px solid vars.$color-success;
+  color: vars.$color-success;
+  @include mixin.input-focus(vars.$color-success);
+
+  &::placeholder {
+    opacity: 0;
+  }
+}
+
+.invalid {
+  @extend %input;
+  border: 2px solid vars.$color-error;
+  color: vars.$color-error;
+
+  @include mixin.input-focus(vars.$color-error);
+
+  &::placeholder {
+    opacity: 0;
+  }
+}
+.error {
+  font-size: 14px;
+  margin: 10px;
+  color: vars.$color-error;
+}
+.toggleButton {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: vars.$color-button;
+  &.errorSVG {
+    color: vars.$color-error;
+  }
+}

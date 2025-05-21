@@ -1,0 +1,149 @@
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+@use "sass:color";
+
+.hero {
+  padding: 50px 0px;
+
+  &__container {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 50px;
+  }
+
+  &__text {
+    flex: 2;
+  }
+
+  &__title {
+    font-size: 40px;
+    color: var(--font-color-1);
+    margin-bottom: 30px;
+    background: linear-gradient(270deg, #cd86f0 33%, #6a6ce4);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__description {
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--font-color-1);
+    margin-bottom: 50px;
+  }
+
+  &__image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  &__button {
+    width: 270px;
+    font-size: 22px;
+    background-color: #686de0;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    display: inline-block;
+    text-align: end;
+    white-space: nowrap;
+    border-radius: 30px;
+    position: relative;
+  }
+
+  .star {
+    display: inline-block;
+    position: absolute;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  .star:nth-child(1) {
+    animation-delay: 0s;
+    font-size: 20px;
+    top: 20px;
+    left: 20px;
+  }
+
+  .star:nth-child(2) {
+    font-size: 30px;
+    animation-delay: 0.2s;
+    top: 10px;
+    left: 38px;
+  }
+
+  .star:nth-child(3) {
+    animation-delay: 0.4s;
+    top: 0px;
+    left: 30px;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+.advantage {
+  &__container {
+    max-width: 1500px;
+    margin: 50px auto;
+  }
+  &__content {
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+  }
+  &__title {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  &Item {
+    position: relative;
+    line-height: 30px;
+    @include mixins.container($padding: 30px);
+    width: 30%;
+  }
+  &__icon {
+    color: vars.$color-primary;
+    font-size: 40px;
+    padding: 10px;
+    background-color: color.mix(vars.$color-primary, transparent, 40%);
+    border-radius: 50%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .hero {
+    &__content {
+      flex-direction: column-reverse;
+      gap: 30px;
+    }
+
+    &__image {
+      width: 60%;
+      &File {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  .advantage {
+    &__content {
+      flex-direction: column;
+    }
+  }
+}

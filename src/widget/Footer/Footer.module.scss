@@ -1,0 +1,72 @@
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+
+.footer {
+  &__content {
+    @include mixins.container($padding: 20px 30px, $border: 40px);
+    max-width: 1320px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  &__navigation {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    padding: 30px;
+    gap: 30px;
+    justify-content: space-evenly;
+  }
+  &__item {
+    list-style: none;
+    margin: 15px 0;
+  }
+  &__title {
+    color: var(--font-color-1);
+  }
+  &__link {
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--font-color-1);
+  }
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--font-color-1);
+  }
+  &__brand {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  &__copyright {
+    margin: 10px 30px;
+    color: var(--font-color-1);
+  }
+  &__socials {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  &__socialLink {
+    color: vars.$color-primary;
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .footer {
+    &__navigation {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    &__navigation {
+      grid-template-columns: 1fr;
+    }
+  }
+}

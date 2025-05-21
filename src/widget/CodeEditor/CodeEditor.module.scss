@@ -1,0 +1,40 @@
+@use "@/app/styles/variables.scss" as vars;
+
+.lecture {
+  &__code {
+    &-editor {
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid vars.$color-border-dark;
+    }
+  }
+}
+.lecture__code-editor :global(.monaco-editor),
+.lecture__code-editor :global(.monaco-editor:focus),
+.lecture__code-editor :global(.monaco-editor-focused),
+.lecture__code-editor :global(.monaco-editor .margin),
+.lecture__code-editor :global(.monaco-editor .monaco-scrollable-element),
+.lecture__code-editor :global(.monaco-editor .view-lines),
+.lecture__code-editor :global(.monaco-editor .overflow-guard) {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.code-editor {
+  &__buttons {
+    display: flex;
+    gap: 10px;
+  }
+  &__output {
+    &-wrapper,
+    &-frame {
+      width: 100%;
+    }
+    &-frame {
+      border: none;
+      border-radius: 10px;
+      background-color: white;
+    }
+  }
+}

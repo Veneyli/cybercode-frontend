@@ -1,0 +1,36 @@
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+
+$light-theme: (
+  color-bg: vars.$color-bg-light,
+  color-container: vars.$color-container-light,
+  color-shadow: vars.$color-shadow-light,
+  font-color-1: vars.$font-color-primary,
+  font-color-2: vars.$font-color-secondary,
+  color-border: vars.$color-border-light,
+  color-input-text: white,
+  color-container-profile: vars.$color-container-frofile-light,
+  color-container-block: vars.$color-container-block-light,
+);
+
+$dark-theme: (
+  color-bg: vars.$color-bg-dark,
+  color-container: vars.$color-container-dark,
+  color-shadow: none,
+  font-color-1: vars.$font-color-light,
+  font-color-2: vars.$font-color-light,
+  color-border: vars.$color-border-dark,
+  color-input-text: vars.$color-input-bg-dark,
+  color-container-profile: vars.$color-container-frofile-dark,
+  color-container-block: vars.$color-container-block-dark,
+);
+
+.light-theme {
+  @include mixins.theme-variables($light-theme);
+  transition: 0.5s;
+}
+
+.dark-theme {
+  @include mixins.theme-variables($dark-theme);
+  transition: 0.5s;
+}

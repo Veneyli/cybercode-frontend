@@ -1,0 +1,52 @@
+// Основные цвета
+$color-primary: #686de0;
+$color-secondary: #5c5fc5;
+
+// Фоновые цвета
+$color-bg-light: #e6ebfe;
+$color-bg-dark: #0c0c16;
+
+// Цвета текста
+$font-color-primary: #020072;
+$font-color-secondary: black;
+$font-color-light: white;
+$font-color-disabled: rgba(0, 0, 0, 0.5);
+
+// Цвета контейнеров
+$color-container-light: #ffffff;
+$color-container-dark: hsla(0, 0%, 100%, 0.05);
+$color-container-frofile-light: rgba(255, 255, 255, 0.4);
+$color-container-frofile-dark: hsla(0, 0%, 0%, 0.3);
+$color-shadow-light: rgba(2, 0, 114, 0.10);
+$color-container-block-light: #ffffff;
+$color-container-block-dark: #181822;
+// $color-shadow-dark: rgba(0, 0, 0, 0.6);
+
+// Цвета для состояния
+$color-success: #8be2b1;
+$color-error: #f31260;
+$color-warning: #ffc107;
+$color-info: #17a2b8;
+
+// Цвета кнопок
+$color-button: #686de0;
+$color-button-hover: #5c5fc5;
+$color-button-disabled: rgba(104, 109, 224, 0.5);
+
+// Границы и разделители
+$color-border-light: #b4b5d3;
+$color-border-dark: #363241;
+
+// Цвета инпутов
+$color-input-bg-light: #ffffff;
+$color-input-bg-dark: transparent;
+$color-input-border: #686de0;
+$color-input-focus: #5c5fc5;
+
+// Декоративные цвета
+$color-accent: #ff6f61;
+$color-muted: rgba(0, 0, 0, 0.6);
+
+// Градиенты
+$gradient-primary: linear-gradient(90deg, #686de0, #5c5fc5);
+$gradient-secondary: linear-gradient(90deg, #14a753, #17a2b8);

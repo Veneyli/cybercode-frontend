@@ -1,0 +1,163 @@
+@use "@/app/styles/mixins.scss" as mixins;
+
+.header {
+  @include mixins.container($flex: row, $padding: 10px 30px, $border: 50px);
+  max-width: 1320px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 10px;
+    position: relative;
+    z-index: 1000;
+
+    & > span {
+      border-radius: 10px;
+      display: block;
+      width: 30px;
+      height: 3px;
+      background-color: var(--font-color-1);
+      position: relative;
+      transition: 0.3s ease;
+
+      &:before,
+      &:after {
+        border-radius: 10px;
+        content: "";
+        width: 30px;
+        height: 3px;
+        background-color: var(--font-color-1);
+        position: absolute;
+        transition: 0.3s ease;
+        left: 0;
+      }
+
+      &:before {
+        top: -8px;
+      }
+
+      &:after {
+        top: 8px;
+      }
+    }
+
+    &--active > span {
+      background-color: transparent;
+      &:before {
+        transform: rotate(45deg);
+        top: 0;
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+        top: 0;
+      }
+    }
+  }
+
+  &__brand {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+    &-subtitle {
+      font-weight: lighter;
+      font-size: 14px;
+    }
+  }
+  &__navigation {
+    align-items: center;
+  }
+  &__nav {
+    padding: 0;
+    &-list {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    &-item {
+      list-style: none;
+    }
+
+    &-link {
+      color: var(--font-color-1);
+      text-decoration: none;
+      font-size: 18px;
+      &--active {
+        color: var(--font-color-1);
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 5px;
+          height: 5px;
+          top: 8px;
+          background-color: rgb(174, 0, 255);
+          left: -10px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .header {
+    &__container {
+      justify-content: space-between;
+    }
+    &__navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      &--open {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &__nav {
+      border-radius: 30px;
+      margin: 15px 20px;
+      display: flex;
+      padding: 40px;
+      background-color: var(--color-container-block);
+      &-list {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+    }
+    &__menu-button {
+      display: block;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .header {
+    &__brand {
+      display: none;
+    }
+  }
+}

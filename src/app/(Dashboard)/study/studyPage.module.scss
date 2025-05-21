@@ -1,0 +1,16 @@
+.study {
+  padding: 30px;
+  &__title {
+    margin-bottom: 30px;
+  }
+  &__courses {
+    &-title {
+      margin-bottom: 20px;
+    }
+    &-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+}

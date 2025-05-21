@@ -1,0 +1,27 @@
+@use "@/styles/mixins.scss" as mixins;
+
+.study-page {
+  &__title {
+    margin-bottom: 40px;
+    font-weight: lighter;
+    text-align: center;
+  }
+  &__content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  &__description {
+    line-height: 30px;
+    margin-bottom: 30px;
+  }
+  &__technologies {
+    display: flex;
+    margin: 10px 0;
+    gap: 10px;
+    &-item {
+      @include mixins.container($flex: row, $padding: 5px 15px, $gap: 10px);
+      align-items: center;
+    }
+  }
+}

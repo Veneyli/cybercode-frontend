@@ -1,0 +1,31 @@
+.lecture {
+  line-height: 30px;
+  &__title {
+    margin-bottom: 20px;
+    font-weight: lighter;
+    text-align: center;
+  }
+  &__description {
+    margin-bottom: 20px;
+  }
+
+  // Стили для контента
+  &__h2 {
+    margin: 16px 0;
+    line-height: 35px;
+  }
+  &__h3 {
+    margin: 8px 0;
+  }
+  // &__p {
+  //   margin-bottom: 16px;
+  // }
+  &__ul,
+  &__ol {
+    margin: 8px 0;
+    margin-left: 20px;
+  }
+  &__li {
+    margin-bottom: 5px;
+  }
+}

@@ -1,0 +1,22 @@
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+@use "@/app/styles/theme.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background: var(--color-bg);
+  padding: 15px;
+  // user-select: none;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+}

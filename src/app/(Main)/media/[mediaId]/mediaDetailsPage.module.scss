@@ -1,0 +1,103 @@
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+@use "sass:color";
+
+.article {
+  max-width: 1320px;
+  margin: 30px auto;
+  display: flex;
+  color: var(--font-color-1);
+  gap: 20px;
+
+  &__content {
+    flex: 1;
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  &__category {
+    background-color: color.mix(vars.$color-button, transparent, 40%);
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+  }
+  &__date {
+    font-size: 16px;
+    color: #727272;
+  }
+  &__title {
+    margin-bottom: 20px;
+    line-height: 45px;
+  }
+  &__image {
+    border-radius: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    overflow: hidden;
+    &-file {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__text {
+    font-size: 18px;
+    line-height: 30px;
+  }
+  &__navigation {
+    @include mixins.container();
+    width: 350px;
+    height: fit-content;
+  }
+  &__links {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-left: 20px;
+  }
+  &__link {
+    color: var(--font-color-1);
+    font-size: 18px;
+    line-height: 25px;
+  }
+  // Стили для контента
+  &__h2 {
+    margin: 16px 0;
+    line-height: 35px;
+  }
+  &__h3 {
+    margin: 8px 0;
+  }
+  // &__p {
+  //   margin-bottom: 16px;
+  // }
+  &__ul,
+  &__ol {
+    margin: 8px 0;
+    margin-left: 20px;
+  }
+  &__li {
+    margin-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .article {
+    &__navigation {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .article {
+    &__content {
+      width: 100%;
+    }
+  }
+}

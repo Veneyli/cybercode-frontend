@@ -8,7 +8,14 @@ import LectureBlock from "@/widget/LectureBlock/LectureBlock";
 import { TestService } from "@/shared/services/test.service";
 import { getServerSession } from "@/lib/getServerSession";
 
-const LecturePage = async ({ params }: { params: { lectureId: string } }) => {
+type Props = {
+  params: {
+    studyId: string;
+    lectureId: string;
+  };
+};
+
+const LecturePage = async ({ params }: Props) => {
   const lectureId = params.lectureId;
   const lecture = await LectureService.lectureById(lectureId);
   const user = await getServerSession();

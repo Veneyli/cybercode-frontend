@@ -12,8 +12,7 @@ interface Props {
 }
 
 export default async function MediaDetailsPage({ params }: Props) {
-  const resolvedParams = await params;
-  const mediaId = resolvedParams.mediaId;
+  const mediaId = params.mediaId;
   const postData: Media = await MediaService.mediaById(mediaId);
 
   const tempDiv =

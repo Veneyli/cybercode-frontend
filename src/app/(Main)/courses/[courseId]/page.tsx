@@ -6,8 +6,7 @@ import Heading from "@/shared/ui/Heading/Heading";
 import CourseProgram from "@/shared/components/CourseProgramm/CourseProgramm";
 
 const CoursePage = async ({ params }: { params: { courseId: string } }) => {
-  const resolvedParams = await params;
-  const courseId = resolvedParams.courseId;
+  const courseId = params.courseId;
   const courseData: Course = await CourseService.courseById(courseId);
   const courseTechnologies = courseData.technologies
     ? courseData.technologies.split(", ")

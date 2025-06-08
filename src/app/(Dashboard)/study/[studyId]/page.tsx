@@ -19,8 +19,7 @@ const StudyDetailsPage = async ({
   params: { studyId: string };
 }) => {
   const user = await getServerSession();
-  const resolvedParams = await params;
-  const courseId = resolvedParams.studyId;
+  const courseId = params.studyId;
   const course: Course = await CourseService.courseById(courseId);
   const userCourseProgress: UserCourseProgress[] =
     await UserService.userProgress(user.user_id);

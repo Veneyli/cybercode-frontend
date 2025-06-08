@@ -9,8 +9,7 @@ import { TestService } from "@/shared/services/test.service";
 import { getServerSession } from "@/lib/getServerSession";
 
 const LecturePage = async ({ params }: { params: { lectureId: string } }) => {
-  const resolvedParams = await params;
-  const lectureId = resolvedParams.lectureId;
+  const lectureId = params.lectureId;
   const lecture = await LectureService.lectureById(lectureId);
   const user = await getServerSession();
 

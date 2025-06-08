@@ -6,6 +6,8 @@ import { useLectureProgress } from "@/providers/LectureProgressContext";
 import Button from "@/shared/ui/Button/Button";
 import Heading from "@/shared/ui/Heading/Heading";
 import styles from "./TestComponent.module.scss";
+import { useCallback } from "react";
+
 type QuestionOption = {
   id: number;
   text: string;
@@ -35,8 +37,7 @@ export default function TestComponent({ userId, lectureId }) {
   const [initialCheckLoading, setInitialCheckLoading] = useState(true);
 
   const currentQuestion = questions[currentIndex];
-
-  const loadTestStatus = async () => {
+  const loadTestStatus = useCallback(async () => {
     setInitialCheckLoading(true);
     try {
       const response = await TestService.checkIfTestPassed(userId, lectureId);
@@ -56,11 +57,11 @@ export default function TestComponent({ userId, lectureId }) {
     } finally {
       setInitialCheckLoading(false);
     }
-  };
+  }, [userId, lectureId]);
 
   useEffect(() => {
     loadTestStatus();
-  }, [userId, lectureId]);
+  }, [loadTestStatus]);
 
   const submitAnswers = async (finalAnswers = answers) => {
     setLoading(true);

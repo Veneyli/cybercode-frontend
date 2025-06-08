@@ -16,7 +16,7 @@ export function useCourseEnrollment(courseId: string) {
         } else {
           setError("Ответ от сервера не содержит данных о записи.");
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Ошибка проверки записи:", err);
         setError("Ошибка при проверке записи.");
       } finally {
@@ -46,9 +46,13 @@ export function useCourseEnrollment(courseId: string) {
           "Не удалось записаться на курс. Ответ не содержит нужных данных."
         );
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Ошибка при записи на курс:", err);
-      setError(err.message || "Ошибка при записи на курс");
+      if (err instanceof Error) {
+        setError(err.message || "Ошибка при записи на курс");
+      } else {
+        setError("Ошибка при записи на курс");
+      }
     } finally {
       setLoading(false);
     }

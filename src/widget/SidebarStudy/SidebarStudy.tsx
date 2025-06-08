@@ -64,7 +64,7 @@ const SidebarStudy: React.FC<SidebarProps> = ({
   const [lectures, setLectures] = useState<Lecture[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const refreshProgress = async () => {
+  const refreshProgress = React.useCallback(async () => {
     if (!studyId || !userId) return;
     try {
       const updatedLectures = await LectureService.lectureWithProgressByCourse(
@@ -75,11 +75,11 @@ const SidebarStudy: React.FC<SidebarProps> = ({
     } catch (err) {
       console.error("Ошибка при обновлении прогресса", err);
     }
-  };
+  }, [studyId, userId]);
 
   useEffect(() => {
     setRefreshProgress(() => refreshProgress);
-  }, [studyId, userId]);
+  }, [refreshProgress, setRefreshProgress]);
 
   useEffect(() => {
     if (!userId || !studyId) {

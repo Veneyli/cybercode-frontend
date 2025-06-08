@@ -8,11 +8,14 @@ import LectureBlock from "@/widget/LectureBlock/LectureBlock";
 import { TestService } from "@/shared/services/test.service";
 import { getServerSession } from "@/lib/getServerSession";
 
-const LecturePage = async ({
-  params,
-}: {
-  params: { studyId: string; lectureId: string };
-}) => {
+interface LecturePageParams {
+  params: {
+    lectureId: string;
+    [key: string]: string;
+  };
+}
+
+const LecturePage = async ({ params }: LecturePageParams) => {
   const lectureId = params.lectureId;
   const lecture = await LectureService.lectureById(lectureId);
   const user = await getServerSession();

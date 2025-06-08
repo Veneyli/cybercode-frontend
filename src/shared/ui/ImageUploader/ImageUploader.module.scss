@@ -1,0 +1,43 @@
+// @use "@/app/styles/variables" as vars;
+// @use "sass:color";
+
+// .dropzone {
+//   border: 2px solid vars.$color-primary;
+//   padding: 20px;
+//   text-align: center;
+//   border-radius: 12px;
+//   cursor: pointer;
+//   transition: border-color 0.2s;
+//   background-color: transparent;
+// }
+
+// // .dropzone.active {
+// //   border-color: #0070f3;
+// //   background-color: #f0f8ff;
+// // }
+
+// .preview {
+//   max-width: 100%;
+//   max-height: 200px;
+//   object-fit: cover;
+//   border-radius: 8px;
+// }
+@use "@/app/styles/variables" as vars;
+@use "sass:color";
+
+.dropzone {
+  border: 2px solid vars.$color-primary;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+}
+
+.dropzone.active {
+  border: 2px dashed vars.$color-primary;
+  background-color: rgba(255, 255, 255, 0.05);
+}

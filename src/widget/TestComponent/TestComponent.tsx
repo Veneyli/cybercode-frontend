@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import { TestService } from "@/shared/services/test.service";
 import { ProgressService } from "@/shared/services/progress.service";
 import { useLectureProgress } from "@/providers/LectureProgressContext";
-
+import Button from "@/shared/ui/Button/Button";
+import Heading from "@/shared/ui/Heading/Heading";
+import styles from "./TestComponent.module.scss";
 type QuestionOption = {
   id: number;
   text: string;
@@ -17,11 +19,7 @@ type Question = {
 };
 
 export default function TestComponent({ userId, lectureId }) {
-<<<<<<< HEAD
   const { refreshProgress } = useLectureProgress();
-=======
-  const { refreshProgress } = useLectureProgress(); // 👈 доступ к контексту
->>>>>>> origin/main
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: number]: number[] }>({});
@@ -38,24 +36,29 @@ export default function TestComponent({ userId, lectureId }) {
 
   const currentQuestion = questions[currentIndex];
 
-  useEffect(() => {
-    const loadTestStatus = async () => {
-      try {
-        const response = await TestService.checkIfTestPassed(userId, lectureId);
+  const loadTestStatus = async () => {
+    setInitialCheckLoading(true);
+    try {
+      const response = await TestService.checkIfTestPassed(userId, lectureId);
 
-        if (response?.isPassed) {
-          setResult(response.result);
-          setIsFinished(true);
-        } else {
-          setQuestions(response.questions || []);
-        }
-      } catch (error) {
-        console.error("Ошибка при загрузке теста", error);
-      } finally {
-        setInitialCheckLoading(false);
+      if (response?.isPassed) {
+        setResult(response.result);
+        setIsFinished(true);
+      } else {
+        setQuestions(response.questions || []);
+        setIsFinished(false);
+        setResult(null);
+        setCurrentIndex(0);
+        setAnswers({});
       }
-    };
+    } catch (error) {
+      console.error("Ошибка при загрузке теста", error);
+    } finally {
+      setInitialCheckLoading(false);
+    }
+  };
 
+  useEffect(() => {
     loadTestStatus();
   }, [userId, lectureId]);
 
@@ -90,14 +93,28 @@ export default function TestComponent({ userId, lectureId }) {
           score: response.percentage,
         });
 
-<<<<<<< HEAD
         refreshProgress();
-=======
-        refreshProgress(); // 👈 обновляем Sidebar после сохранения прогресса
->>>>>>> origin/main
       }
     } catch (error) {
       console.error("Ошибка при отправке теста", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRetry = async () => {
+    setLoading(true);
+    try {
+      await TestService.removeByUserLecture(userId, lectureId);
+      setResult(null);
+      setIsFinished(false);
+      setAnswers({});
+      setCurrentIndex(0);
+
+      await loadTestStatus();
+      refreshProgress();
+    } catch (error) {
+      console.error("Ошибка при удалении результата теста", error);
     } finally {
       setLoading(false);
     }
@@ -137,13 +154,21 @@ export default function TestComponent({ userId, lectureId }) {
     }
     if (result) {
       return (
-        <div>
-          <h2>Тест завершён</h2>
+        <div className={styles["result"]}>
+          <Heading align="center" level={2}>
+            Тест завершён
+          </Heading>
           <p>
             Ваш результат: {result.totalUserCorrect} из{" "}
             {result.totalCorrectAnswers} правильных (
             {result.percentage.toFixed(1)}%)
           </p>
+          <Button
+            variant="bordered"
+            label="Пройти заново"
+            onClick={handleRetry}
+            disabled={loading}
+          />
         </div>
       );
     }
@@ -156,16 +181,17 @@ export default function TestComponent({ userId, lectureId }) {
   }
 
   return (
-    <div>
-      <h3>
+    <div className={styles["question"]}>
+      <Heading align="center" level={3}>
         Вопрос {currentIndex + 1} из {questions.length}
-      </h3>
-      <p>{currentQuestion.question}</p>
-      <ul>
+      </Heading>
+      <p className={styles["question__text"]}>{currentQuestion.question}</p>
+      <ul className={styles["question__options"]}>
         {currentQuestion.options.map((option) => (
-          <li key={option.id}>
-            <label>
+          <li className={styles["question__option"]} key={option.id}>
+            <label className={styles["question__option-label"]}>
               <input
+                className={styles["question__option-input"]}
                 type={currentQuestion.type === "RADIO" ? "radio" : "checkbox"}
                 name={`question-${currentQuestion.id}`}
                 checked={
@@ -184,7 +210,11 @@ export default function TestComponent({ userId, lectureId }) {
           </li>
         ))}
       </ul>
-      <button onClick={handleSubmitCurrentQuestion}>Ответить</button>
+      <Button
+        label="Ответить"
+        onClick={handleSubmitCurrentQuestion}
+        disabled={loading}
+      />
     </div>
   );
 }

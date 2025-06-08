@@ -9,11 +9,14 @@ interface FieldProps {
   name?: string;
   value: string;
   placeholder?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   disabled?: boolean;
   size?: "small" | "medium" | "large";
   status?: "normal" | "valid" | "invalid";
   errorMessage?: string;
+  children?: React.ReactNode;
 }
 
 const Field: React.FC<FieldProps> = ({
@@ -27,6 +30,7 @@ const Field: React.FC<FieldProps> = ({
   size = "medium",
   status = "normal",
   errorMessage,
+  children,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -45,7 +49,6 @@ const Field: React.FC<FieldProps> = ({
   ]
     .filter(Boolean)
     .join(" ");
-
   return (
     <div className={styles.wrapper}>
       {label && (
@@ -54,39 +57,52 @@ const Field: React.FC<FieldProps> = ({
         </label>
       )}
       <div className={styles.inputWrapper}>
-        <input
-          id={name}
-          type={currentInputType}
-          name={name}
-          defaultValue={value}
-          placeholder={placeholder}
-          onChange={onChange}
-          className={inputClassName}
-          disabled={disabled}
-        />
-        {isPasswordField && (
-          <button
-            type="button"
-            className={styles.toggleButton}
-            onClick={togglePasswordVisibility}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+        {type === "select" ? (
+          <select
+            id={name}
+            name={name}
+            value={value}
+            onChange={onChange}
+            className={inputClassName}
+            disabled={disabled}
           >
-            {showPassword ? (
-              <IoEyeOffOutline
-                className={`${styles.icon} ${
-                  status === "invalid" ? styles.errorSVG : ""
-                }
-              `}
-              />
-            ) : (
-              <IoEyeOutline
-                className={`${styles.icon} ${
-                  status === "invalid" ? styles.errorSVG : ""
-                }
-            `}
-              />
+            {children}
+          </select>
+        ) : (
+          <>
+            <input
+              id={name}
+              type={currentInputType}
+              name={name}
+              value={value}
+              placeholder={placeholder}
+              onChange={onChange}
+              className={inputClassName}
+              disabled={disabled}
+            />
+            {isPasswordField && (
+              <button
+                type="button"
+                className={styles.toggleButton}
+                onClick={togglePasswordVisibility}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? (
+                  <IoEyeOffOutline
+                    className={`${styles.icon} ${
+                      status === "invalid" ? styles.errorSVG : ""
+                    }`}
+                  />
+                ) : (
+                  <IoEyeOutline
+                    className={`${styles.icon} ${
+                      status === "invalid" ? styles.errorSVG : ""
+                    }`}
+                  />
+                )}
+              </button>
             )}
-          </button>
+          </>
         )}
       </div>
       {status === "invalid" && errorMessage && (

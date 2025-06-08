@@ -20,14 +20,19 @@ const LecturePage = async ({ params }: { params: { lectureId: string } }) => {
   if (lecture.type === "TEST") {
     questions = await TestService.questionsByLecture(lecture.lecture_id);
   }
-
   return (
     <div className={styles.lecture}>
       <h1 className={styles.lecture__title}>{lecture.title}</h1>
       <p className={styles.lecture__description}>
         Описание лекции: {lecture.description}
       </p>
-      {lecture.type === "CODE" && <CodeEditor lecture={lecture} />}
+      {lecture.type === "CODE" && (
+        <CodeEditor
+          lecture={lecture}
+          userId={user.user_id}
+          lectureId={lecture.lecture_id}
+        />
+      )}
       {(lecture.type === "TEXT" || lecture.type === "OTHER") && (
         <LectureBlock userId={user.user_id} lecture={lecture} />
       )}
@@ -40,10 +45,18 @@ const LecturePage = async ({ params }: { params: { lectureId: string } }) => {
         </p>
       )}
       {lecture.type === "VIDEO" &&
-        (lecture.videoUrl ? (
-          <FlexibleVideo url={lecture.videoUrl} />
+        (lecture.video_url ? (
+          <FlexibleVideo
+            userId={user.user_id}
+            url={lecture.video_url}
+            lectureId={lecture.lecture_id}
+          />
         ) : (
-          <p className={styles.lecture__description}>Видео не добавлено</p>
+          <FlexibleVideo
+            userId={user.user_id}
+            url={lecture.video_url}
+            lectureId={lecture.lecture_id}
+          />
         ))}
     </div>
   );

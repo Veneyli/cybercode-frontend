@@ -7,7 +7,7 @@ import "@blocknote/mantine/style.css";
 import { useTheme } from "@/providers/ThemeProvider";
 
 export default function TextEditor() {
-  const { theme } = useTheme(); 
+  const { theme } = useTheme();
   const editor = useCreateBlockNote();
 
   const customTheme = {

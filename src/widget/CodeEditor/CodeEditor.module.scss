@@ -1,27 +1,25 @@
 @use "@/app/styles/variables.scss" as vars;
 
-.lecture {
-  &__code {
-    &-editor {
-      overflow: hidden;
-      border-radius: 10px;
-      border: 1px solid vars.$color-border-dark;
-    }
-  }
-}
-.lecture__code-editor :global(.monaco-editor),
-.lecture__code-editor :global(.monaco-editor:focus),
-.lecture__code-editor :global(.monaco-editor-focused),
-.lecture__code-editor :global(.monaco-editor .margin),
-.lecture__code-editor :global(.monaco-editor .monaco-scrollable-element),
-.lecture__code-editor :global(.monaco-editor .view-lines),
-.lecture__code-editor :global(.monaco-editor .overflow-guard) {
+.code-editor__code :global(.monaco-editor),
+.code-editor__code :global(.monaco-editor:focus),
+.code-editor__code :global(.monaco-editor-focused),
+.code-editor__code :global(.monaco-editor .margin),
+.code-editor__code :global(.monaco-editor .monaco-scrollable-element),
+.code-editor__code :global(.monaco-editor .view-lines),
+.code-editor__code :global(.monaco-editor .overflow-guard) {
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
 }
 
 .code-editor {
+  // display: flex;
+  // flex-direction: row;
+  &__code {
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+  }
   &__buttons {
     display: flex;
     gap: 10px;
@@ -30,11 +28,52 @@
     &-wrapper,
     &-frame {
       width: 100%;
-    }
-    &-frame {
       border: none;
       border-radius: 10px;
       background-color: white;
+      height: 700px;
     }
   }
+  &__buttons {
+    padding: 10px 0;
+    // display: flex;
+    // flex-direction: column;
+  }
+}
+.code-editor__output-wrapper {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1);
+}
+.code-editor__output-frame {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  height: 96%;
+}
+.code-editor__output-header {
+  height: 16px;
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.code-editor__output-header span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.code-editor__output-header span:nth-child(1) {
+  background-color: #ff5f57;
+}
+.code-editor__output-header span:nth-child(2) {
+  background-color: #ffbd2e;
+}
+.code-editor__output-header span:nth-child(3) {
+  background-color: #28c840;
 }

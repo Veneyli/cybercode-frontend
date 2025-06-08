@@ -7,4 +7,7 @@ export const UserService = {
   userProgress: async (id: string) => {
     return await apiClient.get(`/user/course-progress/${id}`);
   },
+  updateUser: async (id: string, data: Record<string, unknown>) => {
+    return await apiClient.patch(`/user/${id}`, data);
+  },
 };

@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleMenu }) => {
               <ThemeSwitcher />
             </div>
             <div className={styles.settingsButtons}>
-              <Link href={`/profile`}>
+              <Link href={`/edit-profile`}>
                 <Button icon={<LuSettings />} variant="transparent" />
               </Link>
               <Button
@@ -84,7 +84,11 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleMenu }) => {
           <div className={styles.userCardContent}>
             <Image
               className={styles.userCardAvatar}
-              src={user.image_url || "/images/placeholder.jpg"}
+              src={
+                user.image_url
+                  ? `${process.env.NEXT_PUBLIC_API_URL}${user.image_url}`
+                  : "/images/placeholder.jpeg"
+              }
               alt="user"
               width={200}
               height={200}

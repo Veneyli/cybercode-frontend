@@ -1,0 +1,80 @@
+@use "@/app/styles/mixins.scss" as mixins;
+@use "@/app/styles/variables.scss" as vars;
+@use "sass:color";
+
+.courses-filter {
+  &__section {
+    margin-bottom: 20px;
+  }
+  &__title {
+    font-weight: lighter;
+    margin-bottom: 10px;
+  }
+  &__radio,
+  &__checkbox {
+    margin-left: 10px;
+    &-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    &-label {
+      display: flex;
+      gap: 10px;
+      font-size: 16px;
+    }
+  }
+  &__checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid vars.$color-input-border;
+    position: relative;
+    transition: 0.2s;
+    &:checked {
+      background: vars.$color-input-border;
+      &::after {
+        content: "\2714";
+        color: white;
+        font-size: 16px;
+        position: absolute;
+        top: 49%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 0.2s;
+      }
+    }
+    &:disabled {
+      border-color: vars.$color-button-disabled;
+    }
+  }
+  &__radio {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 10px;
+    border: 2px solid vars.$color-input-border;
+    position: relative;
+    &:checked {
+      background: transparent;
+      &::after {
+        content: "";
+        height: 10px;
+        width: 10px;
+        background-color: vars.$color-input-border;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 0.2s;
+      }
+    }
+    &:disabled {
+      border-color: vars.$color-button-disabled;
+    }
+  }
+}

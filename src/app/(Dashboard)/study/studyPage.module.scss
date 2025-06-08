@@ -3,6 +3,11 @@
   &__title {
     margin-bottom: 30px;
   }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   &__courses {
     &-title {
       margin-bottom: 20px;

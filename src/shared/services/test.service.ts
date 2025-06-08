@@ -23,4 +23,6 @@ export const TestService = {
   checkIfTestPassed: async (userId: number, lectureId: number) => {
     return apiClient.get(`/test/status/${userId}/${lectureId}`);
   },
+  removeByUserLecture: (userId: number, lectureId: number) =>
+    apiClient.delete(`/test?userId=${userId}&lectureId=${lectureId}`),
 };

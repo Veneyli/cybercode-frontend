@@ -1,0 +1,70 @@
+.program {
+  &__item {
+    &-list {
+      margin: 10px 0;
+      padding-left: 20px;
+      list-style-type: disc;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &--completed {
+      padding-left: 10px;
+      opacity: 0.85;
+      position: relative;
+      transition: color 0.2s;
+      &::marker {
+        content: "✓";
+        font-size: 1.2em;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  &__section {
+    margin-bottom: 20px;
+    &-title {
+      margin-bottom: 10px;
+    }
+  }
+  &__list {
+    margin: 0 40px;
+  }
+  &__module {
+    &-title {
+      margin-bottom: 10px;
+    }
+    &-list {
+      margin: 10px 0;
+      padding-left: 20px;
+      list-style-type: disc;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &--completed {
+      padding-left: 10px;
+      opacity: 0.85;
+      position: relative;
+      transition: color 0.2s;
+      &::marker {
+        content: "✓";
+        font-size: 1.2em;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  &__module {
+    margin: 0 25px;
+    &-list {
+      margin: 10px 30px;
+    }
+  }
+}

@@ -16,10 +16,12 @@ const CourseUserCard = ({
   course,
   lectures,
   userProgress,
+  completedLectureIds,
 }: {
   course: Course;
   lectures: Lecture[];
   userProgress: number;
+  completedLectureIds: number[];
 }) => {
   // const sortedLectures = [...lectures].sort((a, b) => a.order - b.order);
   const lectureTypeMap = {
@@ -51,9 +53,10 @@ const CourseUserCard = ({
     return a.module_id - b.module_id;
   });
 
-  const lectureCount = sortedLectures.length;
-  const currentIndex = Math.floor((userProgress / 100) * lectureCount);
-  const nextLecture = sortedLectures[currentIndex] || sortedLectures[0];
+  const nextLecture =
+    sortedLectures.find(
+      (lecture) => !completedLectureIds.includes(lecture.lecture_id)
+    ) || sortedLectures[0];
 
   return (
     <div className={styles["course-card"]} key={course.course_id}>

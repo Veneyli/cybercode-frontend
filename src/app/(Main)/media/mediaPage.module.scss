@@ -25,9 +25,6 @@
 
   &__content {
     width: 100%;
-    &-title {
-      @include mixins.title();
-    }
   }
   &__list {
     display: grid;

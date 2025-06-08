@@ -9,7 +9,7 @@
   &__content {
     display: flex;
     gap: 30px;
-    align-items: center;
+    // align-items: center;
   }
   &__description {
     line-height: 30px;
@@ -22,6 +22,45 @@
     &-item {
       @include mixins.container($flex: row, $padding: 5px 15px, $gap: 10px);
       align-items: center;
+    }
+  }
+}
+.study {
+  &-program {
+    &__title {
+      margin-bottom: 10px;
+    }
+    &__section {
+      &-title {
+        margin-bottom: 10px;
+      }
+    }
+    &__list {
+      margin: 10px;
+      padding-left: 20px;
+      list-style-type: disc;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    &__item {
+      &--completed {
+        padding-left: 10px;
+        opacity: 0.85;
+        position: relative;
+        transition: color 0.2s;
+        &::marker {
+          content: "✓";
+          font-size: 1.2em;
+          position: absolute;
+          right: 30px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    &__modules {
+      margin: 10px 40px;
     }
   }
 }

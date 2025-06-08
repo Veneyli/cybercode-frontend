@@ -11,6 +11,7 @@ interface ButtonProps {
   disabled?: boolean;
   size?: "small" | "medium" | "large";
   type?: "button" | "submit" | "reset";
+  style?: React.CSSProperties;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -21,6 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   size = "medium",
   type = "button",
+  style,
 }) => {
   const [rippleStyle, setRippleStyle] = useState<React.CSSProperties | null>(
     null
@@ -47,6 +49,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      style={style}
       type={type}
       onClick={handleButtonClick}
       className={`${styles["button"]} ${styles[variant]} ${styles[size]}`}

@@ -6,7 +6,7 @@ import { Media } from "@/types/media.types";
 
 const MediaCard = (props: Media) => {
   return (
-    <Link href={`/media/${props.post_id}`} passHref>
+    <Link href={`/media/${props.media_id}`} passHref>
       <div className={styles.card}>
         <div className={styles.card__category}>
           <p>{props.category}</p>

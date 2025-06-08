@@ -113,6 +113,6 @@ const Footer = React.memo(() => {
   );
 });
 
-Footer.displayName = "Footer"; // для отладки
+Footer.displayName = "Footer";
 
 export default Footer;

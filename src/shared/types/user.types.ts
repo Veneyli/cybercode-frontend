@@ -6,4 +6,5 @@ export interface User {
   email: string;
   role: string;
   image_url?: string;
+  birthdate?: Date;
 }

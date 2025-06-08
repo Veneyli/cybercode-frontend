@@ -3,6 +3,8 @@ import { useRef, useState, useEffect } from "react";
 import Editor, { loader } from "@monaco-editor/react";
 import styles from "./CodeEditor.module.scss";
 import { useTheme } from "@/providers/ThemeProvider";
+import { useLectureProgress } from "@/providers/LectureProgressContext";
+import { ProgressService } from "@/shared/services/progress.service";
 import Button from "@/ui/Button/Button";
 
 type CodeEditorProps = {
@@ -10,10 +12,14 @@ type CodeEditorProps = {
     code: string;
     language?: string;
   };
+  userId: number;
+  lectureId: number;
 };
 
-const CodeEditor = ({ lecture }: CodeEditorProps) => {
+const CodeEditor = ({ lecture, userId, lectureId }: CodeEditorProps) => {
   const { theme } = useTheme();
+  const { refreshProgress } = useLectureProgress();
+
   const [code, setCode] = useState(lecture.code);
   const [output, setOutput] = useState("");
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -21,33 +27,51 @@ const CodeEditor = ({ lecture }: CodeEditorProps) => {
   const runCode = async () => {
     const lang = lecture.language || "html";
 
-    if (lang === "javascript") {
+    if (lang === "javascript" || lang === "html") {
       if (iframeRef.current) {
         iframeRef.current.srcdoc = code;
         setOutput("");
       }
+
+      await ProgressService.saveProgress({
+        user_id: userId,
+        lecture_id: lectureId,
+        isCompleted: true,
+        completedAt: new Date(),
+        score: undefined,
+      });
+      refreshProgress();
+
       return;
     }
 
     try {
-      const response = await fetch(
-        "https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-RapidAPI-Key": "ВАШ_API_КЛЮЧ",
-            "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
-          },
-          body: JSON.stringify({
-            source_code: code,
-            language_id: getLanguageId(lang),
-          }),
-        }
-      );
+      const response = await fetch("/api/runCode", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source_code: code,
+          language_id: getLanguageId(lang),
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setOutput(`Ошибка API: ${errorData.error || "Unknown error"}`);
+        return;
+      }
 
       const result = await response.json();
       setOutput(result.stdout || result.stderr || "Нет вывода.");
+
+      await ProgressService.saveProgress({
+        user_id: userId,
+        lecture_id: lectureId,
+        isCompleted: true,
+        completedAt: new Date(),
+        score: 100,
+      });
+      refreshProgress();
     } catch (err) {
       console.error("Ошибка выполнения:", err);
       setOutput("Ошибка выполнения кода.");
@@ -80,7 +104,7 @@ const CodeEditor = ({ lecture }: CodeEditorProps) => {
         inherit: true,
         rules: [],
         colors: {
-          "editor.background": "#00000000", // Прозрачный
+          "editor.background": "#00000000",
           "editorGutter.background": "#00000000",
         },
       });
@@ -88,12 +112,12 @@ const CodeEditor = ({ lecture }: CodeEditorProps) => {
   }, [theme]);
 
   return (
-    <div className={styles["lecture__code"]}>
-      <div className={styles["lecture__code-editor"]}>
+    <div className={styles["code-editor"]}>
+      <div className={styles["code-editor__code"]}>
         <Editor
-          height="800px"
+          height="700px"
           language={lecture.language || "html"}
-          defaultValue={lecture.code}
+          value={code}
           theme="transparent-theme"
           onChange={(value) => setCode(value || "")}
           options={{
@@ -113,6 +137,11 @@ const CodeEditor = ({ lecture }: CodeEditorProps) => {
       </div>
 
       <div className={styles["code-editor__output-wrapper"]}>
+        <div className={styles["code-editor__output-header"]}>
+          <span />
+          <span />
+          <span />
+        </div>
         <iframe
           ref={iframeRef}
           sandbox="allow-scripts allow-same-origin"

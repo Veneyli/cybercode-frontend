@@ -1,0 +1,46 @@
+@use "@/styles/mixins.scss" as mixins;
+@use "@/styles/variables.scss" as vars;
+@use "sass:color";
+
+.media {
+  color: var(--font-color-1);
+  max-width: 1320px;
+  display: flex;
+  margin: 30px auto;
+  gap: 30px;
+  &__category {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    scroll-snap-align: start;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    @include mixins.scroll();
+    &Item {
+      margin-bottom: 10px;
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+    }
+  }
+
+  &__content {
+    width: 100%;
+  }
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+// @media screen and (max-width: 1100px) {
+//   .media {
+//   }
+// }
+@media screen and (max-width: 800px) {
+  .media {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}

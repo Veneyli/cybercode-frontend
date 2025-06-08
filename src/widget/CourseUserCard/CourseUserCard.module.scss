@@ -6,9 +6,19 @@
   &__header {
     display: flex;
     gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
   }
-  &__image {
-    border-radius: 15px;
+  &__images {
+    float: left;
+    margin: 0 16px 16px 0;
+    border-radius: 8px;
+    height: fit-content;
+    max-width: 300px;
+  }
+
+  &__info {
+    flex: 1;
   }
   &__title {
     font-weight: 300;

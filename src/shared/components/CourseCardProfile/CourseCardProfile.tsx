@@ -30,13 +30,15 @@ const CourseCardProfile: React.FC<CourseCardProps> = ({ course, index }) => {
             {course.technologies}
           </small>
         </div>
-        <Image
-          src={course.image_url || "/images/placeholder.jpg"}
-          alt={course.title}
-          className={styles["card__image"]}
-          width={150}
-          height={150}
-        />
+        <div className={styles["card__image-wrapper"]}>
+          <Image
+            src={course.image_url || "/images/placeholder.jpg"}
+            alt={course.title}
+            className={styles["card__image"]}
+            width={200}
+            height={200}
+          />
+        </div>
       </div>
     </Link>
   );

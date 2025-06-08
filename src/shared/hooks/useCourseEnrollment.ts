@@ -34,7 +34,7 @@ export function useCourseEnrollment(courseId: string) {
     setError(null);
 
     try {
-      const response = await apiClient.post(`/courses/${courseId}/enroll`);
+      const response = await apiClient.post(`/courses/${courseId}/enroll`, {});
 
       if (
         response?.progress_id !== undefined &&

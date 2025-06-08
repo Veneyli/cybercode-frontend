@@ -21,6 +21,7 @@ import {
   LuFileText,
   LuCircleHelp,
 } from "react-icons/lu";
+import { useSession } from "@/shared/hooks/useSession";
 
 interface SidebarProps {
   toggleSidebar: () => void;
@@ -31,7 +32,8 @@ const SidebarStudy: React.FC<SidebarProps> = ({
   toggleSidebar,
   isSidebarOpen,
 }) => {
-  const userId = "1"; // получить id пользователя из сессии
+  const user = useSession();
+  const userId = user.user?.user_id;
   const lectureTypeMap = {
     VIDEO: {
       icon: <LuCirclePlay className={styles["navigation__link-icon"]} />,
@@ -57,7 +59,13 @@ const SidebarStudy: React.FC<SidebarProps> = ({
   const { studyId } = useParams<{ studyId: string }>();
   const { setRefreshProgress } = useLectureProgress();
 
+  const [course, setCourse] = useState<Course | null>(null);
+  const [modules, setModules] = useState<Module[]>([]);
+  const [lectures, setLectures] = useState<Lecture[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const refreshProgress = async () => {
+    if (!studyId || !userId) return;
     try {
       const updatedLectures = await LectureService.lectureWithProgressByCourse(
         studyId,
@@ -71,14 +79,14 @@ const SidebarStudy: React.FC<SidebarProps> = ({
 
   useEffect(() => {
     setRefreshProgress(() => refreshProgress);
-  }, [studyId]);
-
-  const [course, setCourse] = useState<Course | null>(null);
-  const [modules, setModules] = useState<Module[]>([]);
-  const [lectures, setLectures] = useState<Lecture[]>([]);
-  const [loading, setLoading] = useState(true);
+  }, [studyId, userId]);
 
   useEffect(() => {
+    if (!userId || !studyId) {
+      setLoading(true);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const [courseData, modulesData, lecturesData] = await Promise.all([
@@ -95,9 +103,10 @@ const SidebarStudy: React.FC<SidebarProps> = ({
         setLoading(false);
       }
     };
-    if (studyId) fetchData();
-  }, [studyId]);
-  LectureService.lectureWithProgressByCourse(studyId, userId);
+
+    fetchData();
+  }, [studyId, userId]);
+
   const handleToggleMenu = () => {
     toggleSidebar();
   };

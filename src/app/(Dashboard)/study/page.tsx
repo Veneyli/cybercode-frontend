@@ -11,6 +11,7 @@ import { UserService } from "@/shared/services/user.service";
 interface UserCourseProgress {
   course_id: number;
   progress: number;
+  completedLectureIds: number[];
 }
 
 const StudyPage = async () => {
@@ -37,18 +38,26 @@ const StudyPage = async () => {
                   (progress) => progress.course_id === course.course_id
                 );
                 const userProgress = progressData ? progressData.progress : 0;
+                const courseLectures = lecturesData.filter(
+                  (lecture) => lecture.course_id === course.course_id
+                );
+                const completedLectureIds =
+                  progressData?.completedLectureIds || [];
 
                 return (
                   <CourseUserCard
                     key={course.course_id}
                     course={course}
                     userProgress={userProgress}
-                    lectures={lecturesData}
+                    lectures={courseLectures}
+                    completedLectureIds={completedLectureIds}
                   />
                 );
               })
             ) : (
-              <p className={styles[""]}>Нет курсов, на которые вы записаны</p>
+              <p className={styles["profile__no-courses"]}>
+                Нет курсов, на которые вы записаны.
+              </p>
             )}
           </div>
         </div>

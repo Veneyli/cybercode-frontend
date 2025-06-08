@@ -1,5 +1,5 @@
 export interface Media {
-  post_id: number;
+  media_id: number;
   title: string;
   description: string;
   date?: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Button from "@/shared/ui/Button/Button";
 import styles from "./Categories.module.scss";
 
@@ -12,9 +12,15 @@ const categories = [
   "Веб-разработка",
 ];
 
-export default function Categories() {
-  const [selectedCategory, setSelectedCategory] = useState("Все");
+interface CategoriesProps {
+  selectedCategory: string;
+  onChangeCategory: (category: string) => void;
+}
 
+export default function Categories({
+  selectedCategory,
+  onChangeCategory,
+}: CategoriesProps) {
   return (
     <div className={styles.category}>
       {categories.map((category) => (
@@ -23,7 +29,7 @@ export default function Categories() {
             label={category}
             size="small"
             variant={selectedCategory === category ? "solid" : "flat"}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => onChangeCategory(category)}
           />
         </div>
       ))}

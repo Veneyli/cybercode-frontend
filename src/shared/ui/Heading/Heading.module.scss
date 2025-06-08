@@ -1,6 +1,7 @@
 .heading {
   width: 100%;
   font-weight: 300;
+  color: var(--font-color-1);
 }
 
 .heading--align-start {
@@ -16,23 +17,23 @@
 }
 
 .heading--size-1 {
-  font-size: 2.25rem;
+  font-size: 30px;
 }
 
 .heading--size-2 {
-  font-size: 1.875rem;
+  font-size: 24px;
 }
 
 .heading--size-3 {
-  font-size: 1.5rem;
+  font-size: 20px;
 }
 
 .heading--size-4 {
-  font-size: 1.25rem;
+  font-size: 18px;
 }
 
 .heading--size-5 {
-  font-size: 1.125rem;
+  font-size: 16px;
 }
 
 .heading--size-6 {

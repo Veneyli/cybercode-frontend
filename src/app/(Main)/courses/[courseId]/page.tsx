@@ -5,8 +5,13 @@ import { Course } from "@/shared/types/course.types";
 import Heading from "@/shared/ui/Heading/Heading";
 import CourseProgram from "@/shared/components/CourseProgramm/CourseProgramm";
 
-const CoursePage = async ({ params }: { params: { courseId: string } }) => {
-  const courseId = params.courseId;
+interface Props {
+  params: Promise<{ courseId: string }>;
+}
+
+const CoursePage = async (props: Props) => {
+  const { courseId } = await props.params;
+
   const courseData: Course = await CourseService.courseById(courseId);
   const courseTechnologies = courseData.technologies
     ? courseData.technologies.split(", ")

@@ -8,11 +8,12 @@ import { Media } from "@/types/media.types";
 import { JSDOM } from "jsdom";
 
 interface Props {
-  params: { mediaId: string };
+  params: Promise<{ mediaId: string }>;
 }
 
-export default async function MediaDetailsPage({ params }: Props) {
-  const mediaId = params.mediaId;
+const MediaDetailsPage = async (props: Props) => {
+  const { mediaId } = await props.params;
+
   const postData: Media = await MediaService.mediaById(mediaId);
 
   const tempDiv =
@@ -89,4 +90,5 @@ export default async function MediaDetailsPage({ params }: Props) {
       </aside>
     </div>
   );
-}
+};
+export default MediaDetailsPage;

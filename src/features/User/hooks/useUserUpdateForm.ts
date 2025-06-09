@@ -27,7 +27,7 @@ export const useUserUpdateForm = () => {
 
   const { validateField } = useFieldValidation();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading] = useState(true);
 
   useEffect(() => {
     if (!userId) return;
@@ -70,6 +70,13 @@ export const useUserUpdateForm = () => {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+
+    if (!userId) {
+      setIsSubmitting(false);
+      console.error("userId не найден");
+      return;
+    }
+
     const newErrors: Record<string, string | undefined> = {
       surname: validateField("surname", formData.surname),
       name: validateField("name", formData.name),
@@ -108,7 +115,6 @@ export const useUserUpdateForm = () => {
   };
 
   return {
-    formData,
     errors,
     isSubmitting,
     handleChange,

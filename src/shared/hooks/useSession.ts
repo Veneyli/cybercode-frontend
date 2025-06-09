@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 
+interface IUser {
+  user_id: string;
+  username: string;
+  email: string;
+}
+
 export function useSession() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,7 +23,7 @@ export function useSession() {
 
         if (res.ok) {
           const data = await res.json();
-          setUser(data.user);
+          setUser(data.user as IUser);
         } else {
           setUser(null);
         }

@@ -30,31 +30,31 @@ export const useUserUpdateForm = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!userId) return; // Ждём, пока userId появится
+    if (!userId) return;
 
     const loadUser = async () => {
       try {
-        const user = await UserService.getUser(userId);
-        setFormData({
-          surname: user.user.surname || "",
-          name: user.user.name || "",
-          patronymic: user.user.patronymic || "",
-          email: user.user.email || "",
-          image_url: user.user.image_url || "",
-          gender: user.user.gender || "",
-          birthdate: user.user.birthdate || "",
-          password: "",
-          confirmPassword: "",
-        });
+        if (!userId) {
+          console.error("userId не найден");
+          return;
+        }
+
+        const updateData = {
+          ...formData,
+          image: imageFile ?? undefined,
+        };
+
+        await UserService.updateUser(userId, updateData);
+        router.refresh();
       } catch (e) {
-        console.error("Ошибка при загрузке профиля:", e);
+        console.error("Ошибка при сохранении:", e);
       } finally {
-        setIsLoading(false);
+        setIsSubmitting(false);
       }
     };
 
     loadUser();
-  }, [userId]);
+  }, [formData, imageFile, router, userId]);
 
   const handleChange = (name: string, value: string, file?: File) => {
     setFormData((prev) => ({ ...prev, [name]: value }));

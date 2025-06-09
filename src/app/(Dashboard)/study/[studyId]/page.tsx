@@ -13,13 +13,12 @@ interface UserCourseProgress {
   course_id: number;
   progress: number;
 }
-const StudyDetailsPage = async ({
-  params,
-}: {
-  params: { studyId: string };
+const StudyDetailsPage = async (props: {
+  params: Promise<{ studyId: string }>;
 }) => {
+  const { studyId } = await props.params;
   const user = await getServerSession();
-  const courseId = params.studyId;
+  const courseId = studyId;
   const course: Course = await CourseService.courseById(courseId);
   const userCourseProgress: UserCourseProgress[] =
     await UserService.userProgress(user.user_id);

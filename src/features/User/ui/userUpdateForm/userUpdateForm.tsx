@@ -18,8 +18,9 @@ export const UserUpdateForm = () => {
   const formattedBirthdate =
     formData.birthdate && typeof formData.birthdate === "string"
       ? formData.birthdate.slice(0, 10)
-      : formData.birthdate instanceof Date
-      ? format(formData.birthdate, "yyyy-MM-dd")
+      : formData.birthdate &&
+        Object.prototype.toString.call(formData.birthdate) === "[object Date]"
+      ? format(formData.birthdate as unknown as Date, "yyyy-MM-dd")
       : "";
 
   return (

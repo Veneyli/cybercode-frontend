@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blocknote/mantine": "^0.32.0-hackdays.0",
     "@monaco-editor/react": "^4.7.0",
     "date-fns": "^4.1.0",
     "isomorphic-dompurify": "^2.25.0",

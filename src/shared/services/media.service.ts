@@ -20,7 +20,11 @@ export const MediaService = {
       return response.data;
     } catch (error) {
       console.error("Ошибка при получении медиа:", error);
-      return []; // Защита от падения билда
+      return [];
     }
+  },
+
+  mediaById: async (id: string) => {
+    return apiClient.get(`/media/${id}`);
   },
 };

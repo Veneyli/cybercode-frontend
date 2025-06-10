@@ -20,7 +20,7 @@ export default function SearchMedia({
 }: SearchMediaProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<Media[]>([]);
-  const wrapperRef = useRef<HTMLDivElement>(null); // 1. ref
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (searchQuery.trim() === "") {

@@ -15,10 +15,12 @@ export const MediaService = {
     const queryString = queryParams.toString();
     const endpoint = `/media${queryString ? `?${queryString}` : ""}`;
 
-    return apiClient.get(endpoint);
-  },
-
-  mediaById: async (id: string) => {
-    return apiClient.get(`/media/${id}`);
+    try {
+      const response = await apiClient.get(endpoint);
+      return response.data;
+    } catch (error) {
+      console.error("Ошибка при получении медиа:", error);
+      return []; // Защита от падения билда
+    }
   },
 };

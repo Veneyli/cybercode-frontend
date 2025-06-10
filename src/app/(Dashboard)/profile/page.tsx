@@ -17,14 +17,15 @@ interface UserCourseProgress {
 
 export default async function ProfilePage() {
   const user = await getServerSession();
-  const courseData = await CourseService.courseAll();
-  const userCourseProgress: UserCourseProgress[] =
-    await UserService.userProgress(user.user_id);
-  const lecturesData = await LectureService.lecture();
 
   if (!user) {
     redirect("/login");
   }
+
+  const courseData = await CourseService.courseAll();
+  const userCourseProgress: UserCourseProgress[] =
+    await UserService.userProgress(user.user_id);
+  const lecturesData = await LectureService.lecture();
 
   return (
     <div className={styles["profile"]}>

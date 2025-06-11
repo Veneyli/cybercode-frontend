@@ -17,7 +17,7 @@ export const MediaService = {
 
     try {
       const response = await apiClient.get(endpoint);
-      return response.data;
+      return response.data ?? [];
     } catch (error) {
       console.error("Ошибка при получении медиа:", error);
       return [];

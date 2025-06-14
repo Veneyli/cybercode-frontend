@@ -1,0 +1,31 @@
+@use "sass:color";
+@use "@/app/styles/variables" as vars;
+@use "@/app/styles/mixins" as mixin;
+
+.users {
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__cell {
+    padding: 15px 20px;
+    border-bottom: 1px solid vars.$color-primary;
+    font-weight: 300;
+    text-align: left;
+    &:first-child {
+      font-weight: bold;
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@use "sass:color";
+@use "@/app/styles/variables" as vars;
+@use "@/app/styles/mixins" as mixin;
+
+.users {
+  &__title {
+    margin-bottom: 30px;
+  }
+}

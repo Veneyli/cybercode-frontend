@@ -31,7 +31,10 @@
       "@/components/*": ["./src/shared/components/*"],
       "@/services/*": ["./src/shared/services/*"],
       "@/api/*": ["./src/shared/api/*"],
-      "@/features/*": ["./src/features/*"]
+      "@/features/*": ["./src/features/*"],
+      "@/admin/constants/*": ["./src/features/Admin/constants/*"],
+      "@/admin/ui/*": ["./src/features/Admin/ui/*"],
+      "@/admin/hooks/*": ["./src/features/Admin/hooks/*"]
     }
   },
   "include": [

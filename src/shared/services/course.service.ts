@@ -1,4 +1,5 @@
 import { apiClient } from "@/api/apiClient";
+import type { Course } from "@/types/course.types";
 
 export const CourseService = {
   courseAll: async () => {
@@ -30,5 +31,8 @@ export const CourseService = {
 
     const response = await apiClient.get(`/courses?${queryParams.toString()}`);
     return response;
+  },
+  updateCourse: async (id: string, data: Partial<Course>) => {
+    return apiClient.put(`/courses/${id}`, data);
   },
 };

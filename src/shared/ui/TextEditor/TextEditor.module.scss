@@ -1,0 +1,20 @@
+@use "@/styles/variables" as vars;
+
+.text-editor {
+  border: 2px solid vars.$color-primary;
+  border-radius: 20px;
+  height: 500px;
+  overflow: hidden;
+  // overflow-y: auto;
+}
+.tox,
+.tox-tinymce,
+.tox-editor-container,
+.tox-toolbar,
+.tox-statusbar {
+  background-color: transparent !important;
+}
+
+.tox iframe {
+  background-color: transparent !important;
+}

@@ -14,7 +14,7 @@ const CoursePage = async (props: Props) => {
 
   const courseData: Course = await CourseService.courseById(courseId);
   const courseTechnologies = courseData.technologies
-    ? courseData.technologies.split(", ")
+    ? courseData.technologies
     : [];
 
   return (
@@ -38,7 +38,11 @@ const CoursePage = async (props: Props) => {
                   className={styles["course__technologies-item"]}
                 >
                   <Image
-                    src={`/images/icon/${technology.toLowerCase()}.png`}
+                    src={
+                      courseData.image_url
+                        ? `${process.env.NEXT_PUBLIC_API_URL}${courseData.image_url}`
+                        : "/images/placeholder.jpeg"
+                    }
                     width={20}
                     height={20}
                     alt={technology}
@@ -52,7 +56,11 @@ const CoursePage = async (props: Props) => {
 
         <div className={styles["course__content-images"]}>
           <Image
-            src={courseData.image_url}
+            src={
+              courseData.image_url
+                ? `${process.env.NEXT_PUBLIC_API_URL}${courseData.image_url}`
+                : "/images/placeholder.jpeg"
+            }
             width={500}
             height={500}
             alt={courseData.title}

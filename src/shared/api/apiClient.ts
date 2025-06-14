@@ -100,4 +100,27 @@ export const apiClient = {
       throw error;
     }
   },
+  put: async (url: string, body: Record<string, unknown>) => {
+    try {
+      const response = await fetch(`${API_URL}/api${url}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("PUT ошибка:", response.status, errorText);
+        throw new Error("Ошибка PUT запроса");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Ошибка apiClient.put:", error);
+      throw error;
+    }
+  },
 };

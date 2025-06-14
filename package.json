@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@blocknote/mantine": "^0.32.0-hackdays.0",
+    "@ckeditor/ckeditor5-react": "^9.5.0",
     "@monaco-editor/react": "^4.7.0",
+    "@tinymce/tinymce-react": "^6.2.1",
     "date-fns": "^4.1.0",
     "isomorphic-dompurify": "^2.25.0",
     "jsdom": "^26.1.0",

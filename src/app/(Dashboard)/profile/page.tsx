@@ -19,7 +19,7 @@ export default async function ProfilePage() {
   const user = await getServerSession();
 
   if (!user) {
-    redirect("/login");
+    redirect("/sign-in");
   }
 
   const courseData = await CourseService.courseAll();

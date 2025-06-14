@@ -10,4 +10,10 @@ export const UserService = {
   updateUser: async (id: string, data: Record<string, unknown>) => {
     return await apiClient.patch(`/user/${id}`, data);
   },
+  getAllUsers: async () => {
+    return await apiClient.get(`/user/all`);
+  },
+  deleteUser: async (id: string) => {
+    return await apiClient.delete(`/user/${id}`);
+  },
 };

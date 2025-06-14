@@ -27,7 +27,7 @@ const StudyDetailsPage = async (props: {
   if (!course) {
     return <p>Курс не найден</p>;
   }
-  const technologies = course?.technologies?.split(", ") || [];
+  const technologies = course?.technologies || [];
 
   return (
     <div className={styles["study-page"]}>

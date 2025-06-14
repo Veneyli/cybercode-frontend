@@ -1,4 +1,5 @@
 import { apiClient } from "@/api/apiClient";
+import { TestQuestion } from "../types/test.types";
 
 export const TestService = {
   questionsByLecture: async (id: string) => {
@@ -25,4 +26,8 @@ export const TestService = {
   },
   removeByUserLecture: (userId: number, lectureId: number) =>
     apiClient.delete(`/test?userId=${userId}&lectureId=${lectureId}`),
+
+  saveTest: async (lectureId: number, questions: TestQuestion[]) => {
+    return apiClient.post("/test/save", { lectureId: +lectureId, questions });
+  },
 };

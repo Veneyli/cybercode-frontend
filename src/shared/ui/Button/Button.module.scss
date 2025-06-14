@@ -84,6 +84,19 @@
   }
 }
 
+.remove {
+  @extend %button;
+  font-size: 16px;
+  border: 2px solid vars.$color-error;
+  background-color: transparent;
+  color: vars.$color-error;
+  transition: 0.6s;
+  &:hover:not(:disabled) {
+    background-color: vars.$color-error;
+    color: white;
+    transition: 0.6s;
+  }
+}
 .flat {
   @extend %button;
   background-color: color.mix(vars.$color-button, transparent, 40%);
@@ -117,4 +130,7 @@
     width: 25px;
     height: 25px;
   }
+}
+.label {
+  white-space: nowrap;
 }

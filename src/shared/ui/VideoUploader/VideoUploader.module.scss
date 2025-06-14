@@ -1,0 +1,25 @@
+@use "@/app/styles/variables" as vars;
+
+.dropzone {
+  border: 2px dashed vars.$color-primary;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &.active {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+
+  video {
+    max-width: 100%;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+  }
+}

@@ -7,7 +7,7 @@ interface ButtonProps {
   label?: string;
   icon?: ReactNode;
   onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
-  variant?: "solid" | "bordered" | "flat" | "transparent";
+  variant?: "solid" | "bordered" | "flat" | "remove" | "transparent";
   disabled?: boolean;
   size?: "small" | "medium" | "large";
   type?: "button" | "submit" | "reset";

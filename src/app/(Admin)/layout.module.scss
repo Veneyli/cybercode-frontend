@@ -1,0 +1,114 @@
+@use "@/app/styles/mixins.scss" as mixins;
+
+.layout {
+  @include mixins.containerProfile($padding: 0, $gap: 0);
+  border: 1px solid var(--color-border);
+  height: 97vh;
+  overflow: hidden;
+  transition: all 1s ease;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  grid-template-rows: 100%;
+
+  &.collapsed {
+    grid-template-columns: 50px 1fr;
+  }
+
+  &__content {
+    flex-grow: 1;
+    padding: 30px;
+    width: 100%;
+    transition: margin 1s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @include mixins.scroll();
+    &.shifted {
+      margin-left: 0;
+    }
+  }
+}
+
+.circles {
+  position: absolute;
+  z-index: -999999;
+  width: 100%;
+}
+
+.circle {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(1000px);
+  animation: scale 3s infinite ease-in-out;
+
+  &:nth-child(1) {
+    top: -300px;
+    left: -300px;
+    width: 600px;
+    height: 600px;
+    background-color: rgba(147, 83, 211, 0.2);
+    animation: scale 10s infinite ease-in-out;
+  }
+
+  &:nth-child(2) {
+    top: 700px;
+    left: -200px;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(0, 118, 255, 0.2);
+    animation: scale2 7s infinite ease-in-out;
+  }
+
+  &:nth-child(3) {
+    top: 700px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background-color: rgba(147, 83, 211, 0.2);
+    animation: scale3 15s infinite ease-in-out;
+  }
+}
+
+@keyframes scale {
+  0% {
+    width: 500px;
+    height: 500px;
+  }
+  50% {
+    width: 1000px;
+    height: 1000px;
+  }
+  100% {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+@keyframes scale2 {
+  0% {
+    width: 400px;
+    height: 400px;
+  }
+  50% {
+    width: 700px;
+    height: 700px;
+  }
+  100% {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@keyframes scale3 {
+  0% {
+    width: 300px;
+    height: 300px;
+  }
+  50% {
+    width: 800px;
+    height: 800px;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+  }
+}

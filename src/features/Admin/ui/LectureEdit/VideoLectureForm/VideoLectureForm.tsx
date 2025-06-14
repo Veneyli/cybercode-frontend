@@ -29,6 +29,20 @@ export default function VideoLectureForm({ lecture }: Props) {
     alert("Лекция сохранена");
   };
 
+  const handleCancel = () => {
+    setTitle(lecture.title ?? "");
+    setDescription(lecture.description ?? "");
+    setVideoUrl(lecture.video_url ?? "");
+    setContent(lecture.content ?? "");
+  };
+
+  const handleDelete = async () => {
+    if (confirm("Вы уверены, что хотите удалить лекцию?")) {
+      await LectureService.deleteLecture(lecture.lecture_id);
+      alert("Лекция удалена");
+    }
+  };
+
   return (
     <div className={styles["video-lecture-form"]}>
       <form className={styles["video-lecture-form__form"]}>
@@ -58,7 +72,7 @@ export default function VideoLectureForm({ lecture }: Props) {
         <div className={styles["video-lecture-form__video"]}>
           <label htmlFor="video">Видео лекции</label>
           <VideoUploader
-            value={videoUrl} // передаем текущий url, чтобы загрузчик видел его
+            value={videoUrl}
             onChange={(_, serverPath) => {
               setVideoUrl(serverPath ?? "");
             }}
@@ -84,10 +98,10 @@ export default function VideoLectureForm({ lecture }: Props) {
         <div className={styles["video-lecture-form__actions"]}>
           <div className={styles["video-lecture-form__buttons"]}>
             <Button label="Сохранить" onClick={handleSave} />
-            <Button label="Отмена" variant="bordered" onClick={() => {}} />
+            <Button label="Отмена" variant="bordered" onClick={handleCancel} />
           </div>
           <div className={styles["video-lecture-form__delete"]}>
-            <Button label="Удалить" variant="remove" onClick={() => {}} />
+            <Button label="Удалить" variant="remove" onClick={handleDelete} />
           </div>
         </div>
       </form>

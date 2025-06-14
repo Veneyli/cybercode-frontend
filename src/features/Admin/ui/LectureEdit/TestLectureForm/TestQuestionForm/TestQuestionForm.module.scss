@@ -1,0 +1,53 @@
+@use "@/styles/variables" as vars;
+
+.question {
+  margin-bottom: 10px;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  &__fields {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  &__option {
+    display: flex;
+    gap: 10px;
+    &-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    &-remove {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--font-color-1);
+      margin-left: 100px;
+    }
+    &-input {
+      width: 20px;
+      height: 20px;
+      accent-color: vars.$color-primary;
+      cursor: pointer;
+      margin-right: 6px;
+
+      &[type="radio"] {
+        border-radius: 50%;
+      }
+      &[type="checkbox"] {
+        border-radius: 4px;
+      }
+    }
+  }
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  &__buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+  }
+}

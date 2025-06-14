@@ -9,6 +9,8 @@ import { Lecture } from "@/shared/types/lecture.types";
 import Field from "@/shared/ui/Field/Field";
 import { TestService } from "@/shared/services/test.service";
 import { LectureService } from "@/shared/services/lecture.service";
+import Heading from "@/shared/ui/Heading/Heading";
+import router from "next/router";
 
 type Props = {
   lecture: Lecture;
@@ -62,7 +64,6 @@ export default function TestLectureForm({ lecture }: Props) {
     }));
 
     try {
-
       await LectureService.updateLecture(lecture.lecture_id, {
         title,
         description,
@@ -76,32 +77,61 @@ export default function TestLectureForm({ lecture }: Props) {
       alert("Ошибка при сохранении лекции или тестов");
     }
   };
+  const handleCancel = () => {
+    const confirmed = confirm("Отменить изменения?");
+    if (confirmed) {
+      router.back();
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmed = confirm("Вы уверены, что хотите удалить эту лекцию?");
+    if (!confirmed) return;
+
+    try {
+      await LectureService.deleteLecture(lecture.lecture_id);
+      alert("Лекция удалена");
+      router.push("/admin/lectures");
+    } catch (err) {
+      console.error(err);
+      alert("Ошибка при удалении");
+    }
+  };
 
   return (
     <div className={styles["test-lecture-form"]}>
-      <div className={styles["test-lecture-form__field"]}>
-        <Field
-          label="Тема лекции"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <div className={styles["test-lecture-form__fields"]}>
+        <div className={styles["test-lecture-form__field"]}>
+          <Field
+            label="Тема лекции"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className={styles["test-lecture-form__field"]}>
+          <label
+            htmlFor="description"
+            className={styles["test-lecture-form__label"]}
+          >
+            Описание лекции
+          </label>
+          <textarea
+            name="description"
+            id="description"
+            className={styles["test-lecture-form__textarea"]}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+        </div>
       </div>
-      <div className={styles["test-lecture-form__field"]}>
-        <label
-          htmlFor="description"
-          className={styles["test-lecture-form__label"]}
-        >
-          Описание лекции
-        </label>
-        <textarea
-          name="description"
-          id="description"
-          className={styles["test-lecture-form__textarea"]}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-      </div>
-      <h2>Тест к лекции: {lecture.title}</h2>
+
+      <Heading
+        align="center"
+        className={styles["test-lecture-form__heading"]}
+        level={2}
+      >
+        Тест к лекции: {lecture.title}
+      </Heading>
       {questions.map((q, idx) => (
         <TestQuestionForm
           key={idx}
@@ -112,6 +142,14 @@ export default function TestLectureForm({ lecture }: Props) {
       ))}
       <Button label="Добавить вопрос" onClick={addQuestion} />
       <Button label="Сохранить тест" onClick={handleSave} />
+      <div className={styles["text-lecture-form__actions"]}>
+        <div className={styles["text-lecture-form__buttons"]}>
+          <Button label="Отмена" variant="bordered" onClick={handleCancel} />
+        </div>
+        <div className={styles["text-lecture-form__delete"]}>
+          <Button variant="remove" label="Удалить" onClick={handleDelete} />
+        </div>
+      </div>
     </div>
   );
 }

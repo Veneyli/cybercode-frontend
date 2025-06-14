@@ -2,8 +2,6 @@ import { Lecture } from "@/shared/types/lecture.types";
 import TextLectureForm from "./TextLectureForm/TextLectureForm";
 import VideoLectureForm from "./VideoLectureForm/VideoLectureForm";
 import TestLectureForm from "./TestLectureForm/TestLectureForm";
-// import CodeLectureForm from "./types/CodeLectureForm";
-// import TestLectureForm from "./types/TestLectureForm";
 
 type Props = {
   lecture: Lecture;

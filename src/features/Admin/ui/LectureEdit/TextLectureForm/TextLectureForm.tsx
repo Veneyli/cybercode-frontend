@@ -7,6 +7,7 @@ import Button from "@/shared/ui/Button/Button";
 import { LectureService } from "@/shared/services/lecture.service";
 import TextEditor from "@/shared/ui/TextEditor/TextEditor";
 import styles from "./TextLectureForm.module.scss";
+import router from "next/router";
 
 type Props = {
   lecture: Lecture;
@@ -33,6 +34,27 @@ export default function TextLectureForm({ lecture }: Props) {
       alert("Ошибка при сохранении");
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleCancel = () => {
+    const confirmed = confirm("Отменить изменения?");
+    if (confirmed) {
+      router.back();
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmed = confirm("Вы уверены, что хотите удалить эту лекцию?");
+    if (!confirmed) return;
+
+    try {
+      await LectureService.deleteLecture(lecture.lecture_id);
+      alert("Лекция удалена");
+      router.push("/admin/lectures");
+    } catch (err) {
+      console.error(err);
+      alert("Ошибка при удалении");
     }
   };
 
@@ -80,10 +102,10 @@ export default function TextLectureForm({ lecture }: Props) {
               onClick={handleSave}
               disabled={isSaving}
             />
-            <Button label="Отмена" variant="bordered" onClick={() => {}} />
+            <Button label="Отмена" variant="bordered" onClick={handleCancel} />
           </div>
           <div className={styles["text-lecture-form__delete"]}>
-            <Button label="Удалить" variant="remove" onClick={() => {}} />
+            <Button variant="remove" label="Удалить" onClick={handleDelete} />
           </div>
         </div>
       </form>

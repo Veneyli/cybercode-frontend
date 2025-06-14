@@ -3,6 +3,7 @@ export interface Lecture {
   module_id: number;
   course_id: number;
   title: string;
+  content: string;
   description: string;
   video_url?: string;
   order: number;

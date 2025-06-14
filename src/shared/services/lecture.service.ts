@@ -30,4 +30,7 @@ export const LectureService = {
   updateLecture: async (id: number, data: Partial<Lecture>) => {
     return apiClient.patch(`/lecture/${id}`, data);
   },
+  deleteLecture: async (id: number) => {
+    return apiClient.delete(`/lecture/${id}`);
+  },
 };

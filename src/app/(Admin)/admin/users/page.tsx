@@ -20,7 +20,7 @@ const UsersPage = async () => {
         <Heading align="center" className={styles["users__title"]} level={1}>
           Пользователи
         </Heading>
-        <UserTableClient users={users} />
+        <UserTableClient users={users ?? []} />
       </div>
     </div>
   );

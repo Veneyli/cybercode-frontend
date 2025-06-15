@@ -63,7 +63,11 @@ const CourseUserCard = ({
       <div className={styles["course-card__header"]}>
         <div className={styles["course-card__images"]}>
           <Image
-            src={course.image_url || "/images/placeholder.jpg"}
+            src={
+              course.image_url
+                ? `${process.env.NEXT_PUBLIC_API_URL}${course.image_url}`
+                : "/images/placeholder.jpeg"
+            }
             width={300}
             height={200}
             alt={course.title}

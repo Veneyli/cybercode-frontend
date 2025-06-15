@@ -4,7 +4,14 @@ import { UserService } from "@/shared/services/user.service";
 import UserTableClient from "@/widget/UserTableClient/UserTableClient";
 
 const UsersPage = async () => {
-  const users = await UserService.getAllUsers();
+  let users = [];
+
+  try {
+    users = await UserService.getAllUsers();
+  } catch (error) {
+    console.error("Пользователи не загружены", error);
+  }
+
   return (
     <div className={styles["users"]}>
       <div className={styles["users__content"]}>

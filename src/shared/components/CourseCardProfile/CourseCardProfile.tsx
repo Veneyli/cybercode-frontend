@@ -32,7 +32,11 @@ const CourseCardProfile: React.FC<CourseCardProps> = ({ course, index }) => {
         </div>
         <div className={styles["card__image-wrapper"]}>
           <Image
-            src={course.image_url || "/images/placeholder.jpg"}
+            src={
+              course.image_url
+                ? `${process.env.NEXT_PUBLIC_API_URL}${course.image_url}`
+                : "/images/placeholder.jpeg"
+            }
             alt={course.title}
             className={styles["card__image"]}
             width={200}

@@ -7,16 +7,22 @@ import { User } from "@/types/user.types";
 import Link from "next/link";
 
 interface UserTableProps {
-  users: User[];
+  users: User[] | null | undefined;
 }
 
 const UserTableClient: React.FC<UserTableProps> = ({ users }) => {
-  const [userList, setUserList] = useState(users);
+  const [userList, setUserList] = useState<User[]>(
+    Array.isArray(users) ? users : []
+  );
 
   const handleDeleteUser = async (id: string) => {
     await UserService.deleteUser(id);
     setUserList((prev) => prev.filter((user) => String(user.user_id) !== id));
   };
+
+  if (userList.length === 0) {
+    return <p className={styles["users__empty"]}>Пользователи не найдены.</p>;
+  }
 
   return (
     <table className={styles["users__table"]}>

@@ -1,4 +1,5 @@
 import { apiClient } from "@/api/apiClient";
+import { User } from "../types/user.types";
 
 export const UserService = {
   getUser: async (id: string) => {
@@ -10,9 +11,16 @@ export const UserService = {
   updateUser: async (id: string, data: Record<string, unknown>) => {
     return await apiClient.patch(`/user/${id}`, data);
   },
-  getAllUsers: async () => {
-    return await apiClient.get(`/user/all`);
+  getAllUsers: async (): Promise<User[]> => {
+    try {
+      const response = await apiClient.get(`/user/all`);
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (e) {
+      console.error("Ошибка получения пользователей", e);
+      return [];
+    }
   },
+
   deleteUser: async (id: string) => {
     return await apiClient.delete(`/user/${id}`);
   },

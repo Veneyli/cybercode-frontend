@@ -3,8 +3,10 @@ import styles from "./usersPage.module.scss";
 import { UserService } from "@/shared/services/user.service";
 import UserTableClient from "@/widget/UserTableClient/UserTableClient";
 
+import type { User } from "@/shared/types/user.types";
+
 const UsersPage = async () => {
-  let users = [];
+  let users: User[] = [];
 
   try {
     users = await UserService.getAllUsers();

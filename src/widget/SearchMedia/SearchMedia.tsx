@@ -31,15 +31,15 @@ export default function SearchMedia({
           ? media
           : media.filter((m) => m.category === selectedCategory);
 
-      onSearch((prev: any[]) => {
-        const same =
-          prev.length === filtered.length &&
-          prev.every((item, i) => item.media_id === filtered[i].media_id);
+      const same =
+        media.length === filtered.length &&
+        media.every((item, i) => item.media_id === filtered[i].media_id);
 
-        return same ? prev : filtered;
-      });
+      if (!same) {
+        onSearch(filtered);
+      }
     }
-  }, [searchQuery, selectedCategory, media]);
+  }, [searchQuery, selectedCategory, media, onSearch]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

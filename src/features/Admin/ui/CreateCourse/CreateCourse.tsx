@@ -1,26 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Field from "@/shared/ui/Field/Field";
 import { technologies } from "@/admin/constants/technologies";
 import ImageUploader from "@/shared/ui/ImageUploader/ImageUploader";
-import styles from "./EditCourseForm.module.scss";
+import styles from "./CreateCourse.module.scss";
 import Button from "@/shared/ui/Button/Button";
 import Image from "next/image";
-import { useUpdateCourse } from "@/admin/hooks/useUpdateCourse";
-import { useCourse } from "@/admin/hooks/useCourse";
-import { Module } from "@/shared/types/module.types";
-import ModulesEditor from "@/features/Admin/ui/ModuleEditor/ModuleEditor";
-import { CourseService } from "@/shared/services/course.service";
-import router from "next/router";
+import { CourseService } from "@/services/course.service";
 
-interface EditCourseFormProps {
-  courseId: number;
-}
-
-export default function EditCourseForm({ courseId }: EditCourseFormProps) {
-  const { course, isLoading } = useCourse(courseId);
-
-  const { updateCourse } = useUpdateCourse(courseId);
+export default function CreateCourseForm() {
+  const router = useRouter();
 
   const [form, setForm] = useState({
     title: "",
@@ -28,28 +18,10 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
     technologies: [] as string[],
     level: "",
     image_url: "",
-    modules: [] as Module[],
     small_description: "",
-    isPublished: false,
   });
 
-  useEffect(() => {
-    if (!isLoading && course) {
-      setForm({
-        title: course.title ?? "",
-        description: course.description ?? "",
-        technologies: course.technologies ?? [],
-        level: course.level ?? "",
-        image_url: course.image_url ?? "",
-        modules: course.modules ?? [],
-        small_description: course.small_description ?? "",
-        isPublished: course.isPublished ?? false,
-      });
-    }
-  }, [course, isLoading]);
-
   const [showTechSelect, setShowTechSelect] = useState(false);
-
   const [selectedTech, setSelectedTech] = useState("");
 
   const handleChange = (
@@ -77,29 +49,24 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
       technologies: prev.technologies.filter((t) => t !== tech),
     }));
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await updateCourse(form);
-  };
-  const handleCancel = () => {
-    router.back();
-    // Или router.push("/admin/courses");
-  };
-
-  const handleDelete = async () => {
-    if (confirm("Вы уверены, что хотите удалить этот курс?")) {
-      try {
-        await CourseService.deleteCourse(courseId.toString());
-        router.push("/admin/courses"); 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (error) {
-        alert("Ошибка при удалении курса");
+    try {
+      const createdCourse = await CourseService.create(form);
+      console.log("Created course:", createdCourse);
+      if (createdCourse && createdCourse.course_id) {
+        router.push(`/admin/edit-course/${createdCourse.course_id}`);
+      } else {
+        console.error("Course not created, response:", createdCourse);
       }
+    } catch (error) {
+      console.error("Error creating course:", error);
     }
   };
-  if (isLoading) return <p>Загрузка...</p>;
+
   return (
-    <form className={styles["edit-course"]} onSubmit={handleSubmit}>
+    <form className={styles["create-course"]} onSubmit={handleSubmit}>
       <Field
         label="Название курса"
         name="title"
@@ -108,11 +75,11 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
         onChange={handleChange}
       />
 
-      <div className={styles["edit-course__field"]}>
-        <label htmlFor="technologies" className={styles["edit-course__label"]}>
+      <div className={styles["create-course__field"]}>
+        <label htmlFor="image" className={styles["create-course__label"]}>
           Картинка курса
         </label>
-        <div className={styles["edit-course__image-wrapper"]}>
+        <div className={styles["create-course__image-wrapper"]}>
           <Image
             src={
               form.image_url
@@ -135,12 +102,12 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
         </div>
       </div>
 
-      <div className={styles["edit-course__field"]}>
-        <label htmlFor="description" className={styles["edit-course__label"]}>
+      <div className={styles["create-course__field"]}>
+        <label htmlFor="description" className={styles["create-course__label"]}>
           Описание курса
         </label>
         <textarea
-          className={styles["edit-course__textarea"]}
+          className={styles["create-course__textarea"]}
           name="description"
           id="description"
           placeholder="Описание курса"
@@ -148,15 +115,16 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
           onChange={handleChange}
         ></textarea>
       </div>
-      <div className={styles["edit-course__field"]}>
+
+      <div className={styles["create-course__field"]}>
         <label
           htmlFor="small_description"
-          className={styles["edit-course__label"]}
+          className={styles["create-course__label"]}
         >
-          Короткое описание курса (для карточек)
+          Короткое описание курса
         </label>
         <textarea
-          className={styles["edit-course__textarea"]}
+          className={styles["create-course__textarea"]}
           name="small_description"
           id="small_description"
           placeholder="Короткое описание курса"
@@ -165,19 +133,19 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
         ></textarea>
       </div>
 
-      <div className={styles["edit-course__field"]}>
-        <label className={styles["edit-course__label"]}>Технологии</label>
-        <div className={styles["edit-course__tech-wrapper"]}>
+      <div className={styles["create-course__field"]}>
+        <label className={styles["create-course__label"]}>Технологии</label>
+        <div className={styles["create-course__tech-wrapper"]}>
           {form.technologies.map((tech) => {
             const label =
               technologies.find((t) => t.value === tech)?.label || tech;
             return (
-              <span key={tech} className={styles["edit-course__tag"]}>
+              <span key={tech} className={styles["create-course__tag"]}>
                 {label}
                 <button
                   onClick={() => handleRemoveTech(tech)}
                   type="button"
-                  className={styles["edit-course__remove-button"]}
+                  className={styles["create-course__remove-button"]}
                 >
                   &times;
                 </button>
@@ -212,8 +180,8 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
         </div>
       </div>
 
-      <div className={styles["edit-course__field"]}>
-        <label htmlFor="level" className={styles["edit-course__label"]}>
+      <div className={styles["create-course__field"]}>
+        <label htmlFor="level" className={styles["create-course__label"]}>
           Уровень
         </label>
         <Field
@@ -228,35 +196,8 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
           <option value="advanced">Продвинутый</option>
         </Field>
       </div>
-      <Field
-        label="Статус"
-        name="isPublished"
-        type="select"
-        value={form.isPublished ? "true" : "false"}
-        onChange={(e) =>
-          setForm((prev) => ({
-            ...prev,
-            isPublished: e.target.value === "true",
-          }))
-        }
-      >
-        <option value="true">Опубликован</option>
-        <option value="false">Не опубликован</option>
-      </Field>
-      <div>
-        <ModulesEditor
-          currentCourseId={courseId}
-          modules={form.modules}
-          onChange={(modules) => setForm((prev) => ({ ...prev, modules }))}
-        />
-      </div>
-      <div className={styles["edit-course__buttons"]}>
-        <Button label="Сохранить курс" type="submit" />
-        <Button label="Отмена" variant="bordered" onClick={handleCancel} />
-      </div>
-      <div className={styles["edit-course__delete"]}>
-        <Button label="Удалить" variant="remove" onClick={handleDelete} />
-      </div>
+
+      <Button label="Создать курс" type="submit" />
     </form>
   );
 }

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styles from "./UserTableClient.module.scss";
 import { UserService } from "@/shared/services/user.service";
 import { User } from "@/types/user.types";
-import Link from "next/link";
+import Field from "@/shared/ui/Field/Field";
 
 interface UserTableProps {
   users: User[] | null | undefined;
@@ -16,8 +16,25 @@ const UserTableClient: React.FC<UserTableProps> = ({ users }) => {
   );
 
   const handleDeleteUser = async (id: string) => {
-    await UserService.deleteUser(id);
-    setUserList((prev) => prev.filter((user) => String(user.user_id) !== id));
+    try {
+      await UserService.deleteUser(id);
+      setUserList((prev) => prev.filter((user) => String(user.user_id) !== id));
+    } catch (error) {
+      console.error("Ошибка при удалении пользователя:", error);
+    }
+  };
+
+  const handleRoleChange = async (userId: string, newRole: string) => {
+    try {
+      await UserService.updateUserRole(userId, newRole);
+      setUserList((prev) =>
+        prev.map((user) =>
+          String(user.user_id) === userId ? { ...user, role: newRole } : user
+        )
+      );
+    } catch (error) {
+      console.error("Ошибка при изменении роли:", error);
+    }
   };
 
   if (userList.length === 0) {
@@ -29,7 +46,7 @@ const UserTableClient: React.FC<UserTableProps> = ({ users }) => {
       <thead className={styles["users__header"]}>
         <tr className={styles["users__row"]}>
           <th className={styles["users__cell"]}>ID</th>
-          <th className={styles["users__cell"]}>Имя</th>
+          <th className={styles["users__cell"]}>ФИО</th>
           <th className={styles["users__cell"]}>Email</th>
           <th className={styles["users__cell"]}>Роль</th>
           <th className={styles["users__cell"]}>Действия</th>
@@ -39,16 +56,24 @@ const UserTableClient: React.FC<UserTableProps> = ({ users }) => {
         {userList.map((user) => (
           <tr className={styles["users__row"]} key={user.user_id}>
             <td className={styles["users__cell"]}>{user.user_id}</td>
-            <td className={styles["users__cell"]}>{user.name}</td>
-            <td className={styles["users__cell"]}>{user.email}</td>
-            <td className={styles["users__cell"]}>{user.role}</td>
             <td className={styles["users__cell"]}>
-              <Link
-                href={`/admin/edit-user/${user.user_id}`}
-                className={styles["users__button"]}
+              {user.surname} {user.name} {user.patronymic}
+            </td>
+            <td className={styles["users__cell"]}>{user.email}</td>
+            <td className={styles["users__cell"]}>
+              <Field
+                type="select"
+                value={user.role}
+                onChange={(e) =>
+                  handleRoleChange(String(user.user_id), e.target.value)
+                }
               >
-                Редактировать
-              </Link>
+                <option value="ADMIN">Администратор</option>
+                <option value="REGULAR">Пользователь</option>
+                <option value="TEACHER">Преподаватель</option>
+              </Field>
+            </td>
+            <td className={styles["users__cell"]}>
               <button
                 className={styles["users__button"]}
                 onClick={() => handleDeleteUser(String(user.user_id))}

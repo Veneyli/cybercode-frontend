@@ -1,13 +1,20 @@
+import EditPost from "@/features/Admin/ui/EditPost/EditPost";
 import styles from "./editPostPage.module.scss";
 import Heading from "@/shared/ui/Heading/Heading";
+import { MediaService } from "@/shared/services/media.service";
 
-const editPostPage = async () => {
+interface Props {
+  params: Promise<{ postId: string }>;
+}
+const editPostPage = async ({ params }: Props) => {
+  const { postId } = await params;
+  const post = (await MediaService.mediaById(postId)) || [];
   return (
     <div className={styles["edit-post"]}>
-      <Heading level={1} className={styles["edit-post__title"]}>
+      <Heading align="center" level={1} className={styles["edit-post__title"]}>
         Редактировать пост
       </Heading>
-      <form className={styles["edit-post__form"]}></form>
+      <EditPost post={post} />
     </div>
   );
 };

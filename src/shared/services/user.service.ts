@@ -14,7 +14,7 @@ export const UserService = {
   getAllUsers: async (): Promise<User[]> => {
     try {
       const response = await apiClient.get(`/user/all`);
-      return Array.isArray(response.data) ? response.data : [];
+      return Array.isArray(response) ? response : [];
     } catch (e) {
       console.error("Ошибка получения пользователей", e);
       return [];
@@ -23,5 +23,8 @@ export const UserService = {
 
   deleteUser: async (id: string) => {
     return await apiClient.delete(`/user/${id}`);
+  },
+  async updateUserRole(id: string, newRole: string) {
+    return apiClient.patch(`/user/${id}/role`, { role: newRole });
   },
 };

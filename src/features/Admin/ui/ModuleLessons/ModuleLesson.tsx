@@ -13,6 +13,7 @@ type ModuleLessonsProps = {
   courseId?: number;
   lessons?: Lecture[];
   onUpdate?: (updatedLecture: Lecture) => void;
+  onDelete?: (removedLectureId: number) => void;
 };
 
 const ModuleLessons = ({
@@ -20,6 +21,7 @@ const ModuleLessons = ({
   moduleId,
   courseId,
   onUpdate,
+  onDelete,
 }: ModuleLessonsProps) => {
   const [isCreating, setIsCreating] = useState(false);
   const [title, setTitle] = useState("");
@@ -46,6 +48,25 @@ const ModuleLessons = ({
       setType("TEXT");
     }
   };
+  const types = {
+    TEXT: "Лекция",
+    VIDEO: "Видеоурок",
+    CODE: "Код",
+    TEST: "Тест",
+  };
+  const handleRemoveLesson = async (id: number) => {
+    const confirmed = confirm("Вы уверены, что хотите удалить эту лекцию?");
+    if (!confirmed) return;
+
+    try {
+      await LectureService.deleteLecture(id);
+
+      if (onDelete) onDelete(id);
+    } catch (err) {
+      console.error(err);
+      alert("Ошибка при удалении лекции");
+    }
+  };
 
   return (
     <div className={styles["lesson"]}>
@@ -57,14 +78,22 @@ const ModuleLessons = ({
             .map((lesson) => (
               <div key={lesson.lecture_id} className={styles["lesson__item"]}>
                 <p>
-                  {lesson.order}. {lesson.title}
+                  {lesson.order}. {lesson.title} ({types[lesson.type]})
                 </p>
-                <Link
-                  className={styles["lesson__edit-link"]}
-                  href={`/admin/edit-lecture/${lesson.lecture_id}`}
-                >
-                  Редактировать
-                </Link>
+                <div className={styles["lesson__actions"]}>
+                  <Link
+                    className={styles["lesson__edit-link"]}
+                    href={`/admin/edit-lecture/${lesson.lecture_id}`}
+                  >
+                    Редактировать
+                  </Link>
+                  <button
+                    className={styles["lesson__remove-button"]}
+                    onClick={() => handleRemoveLesson(lesson.lecture_id)}
+                  >
+                    Удалить
+                  </button>
+                </div>
               </div>
             ))
         ) : (

@@ -23,14 +23,23 @@ export default function SearchMedia({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (media.length === 0) return;
+
     if (searchQuery.trim() === "") {
       const filtered =
         selectedCategory === "Все"
           ? media
           : media.filter((m) => m.category === selectedCategory);
-      onSearch(filtered);
+
+      onSearch((prev: any[]) => {
+        const same =
+          prev.length === filtered.length &&
+          prev.every((item, i) => item.media_id === filtered[i].media_id);
+
+        return same ? prev : filtered;
+      });
     }
-  }, [searchQuery, selectedCategory, media, onSearch]);
+  }, [searchQuery, selectedCategory, media]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

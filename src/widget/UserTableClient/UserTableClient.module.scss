@@ -21,7 +21,8 @@
   &__button {
     background-color: transparent;
     border: none;
-    color: #007bff;
+    color: vars.$color-error;
+    font-size: 18px;
     cursor: pointer;
 
     &:hover {

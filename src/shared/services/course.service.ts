@@ -35,4 +35,11 @@ export const CourseService = {
   updateCourse: async (id: string, data: Partial<Course>) => {
     return apiClient.put(`/courses/${id}`, data);
   },
+  create: async (data: Partial<Course>) => {
+    const res = await apiClient.post("/courses", data);
+    return res;
+  },
+  deleteCourse: async (id: string) => {
+    return apiClient.delete(`/courses/${id}`);
+  },
 };

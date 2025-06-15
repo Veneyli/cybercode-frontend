@@ -7,4 +7,5 @@ export interface Media {
   category?: string;
   content: string;
   isPublished?: boolean;
+  
 }

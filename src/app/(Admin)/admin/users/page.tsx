@@ -2,7 +2,6 @@ import Heading from "@/shared/ui/Heading/Heading";
 import styles from "./usersPage.module.scss";
 import { UserService } from "@/shared/services/user.service";
 import UserTableClient from "@/widget/UserTableClient/UserTableClient";
-
 import type { User } from "@/shared/types/user.types";
 
 const UsersPage = async () => {
@@ -20,7 +19,7 @@ const UsersPage = async () => {
         <Heading align="center" className={styles["users__title"]} level={1}>
           Пользователи
         </Heading>
-        <UserTableClient users={users ?? []} />
+        <UserTableClient users={users} />
       </div>
     </div>
   );

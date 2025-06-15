@@ -3,6 +3,8 @@ import styles from "./postsPage.module.scss";
 import Image from "next/image";
 import { MediaService } from "@/shared/services/media.service";
 import { Media } from "@/types/media.types";
+import Link from "next/dist/client/link";
+import Button from "@/shared/ui/Button/Button";
 
 const PostsPage = async () => {
   const posts: Media[] = (await MediaService.media()) || [];
@@ -30,6 +32,13 @@ const PostsPage = async () => {
               <p className={styles["posts__item-description"]}>
                 {post.description}
               </p>
+
+              <Link
+                className={styles["posts__item-edit-link"]}
+                href={`/admin/edit-post/${post.media_id}`}
+              >
+                <Button label="Редактировать" />
+              </Link>
             </div>
           ))
         ) : (

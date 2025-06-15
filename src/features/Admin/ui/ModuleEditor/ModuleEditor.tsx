@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Module } from "@/shared/types/module.types";
 import ModuleLessons from "../ModuleLessons/ModuleLesson";
 import styles from "./ModuleEditor.module.scss";
@@ -78,6 +78,19 @@ const ModulesEditor = ({
     await updateOrders(updated);
     setEditingId(null);
   };
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpenId(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const moveModule = async (index: number, direction: "up" | "down") => {
     const newModules = [...sortedModules];
@@ -171,7 +184,10 @@ const ModulesEditor = ({
                   </button>
 
                   {menuOpenId === module.module_id && (
-                    <div className={styles["module-editor__menu"]}>
+                    <div
+                      ref={menuRef}
+                      className={styles["module-editor__menu"]}
+                    >
                       <button
                         className={styles["module-editor__menu-item"]}
                         onClick={() => {
@@ -208,6 +224,20 @@ const ModulesEditor = ({
                             }
                           : m
                       );
+                      onChange(updated);
+                    }}
+                    onDelete={(removedId) => {
+                      const updated = modules.map((m) => {
+                        if (m.module_id === module.module_id) {
+                          return {
+                            ...m,
+                            lectures: (m.lectures ?? []).filter(
+                              (lec) => lec.lecture_id !== removedId
+                            ),
+                          };
+                        }
+                        return m;
+                      });
                       onChange(updated);
                     }}
                   />

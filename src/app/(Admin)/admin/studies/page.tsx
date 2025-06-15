@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CourseService } from "@/shared/services/course.service";
 import { Course } from "@/types/course.types";
+import Button from "@/shared/ui/Button/Button";
 
 const StudiesPage = async () => {
   const courses: Course[] = (await CourseService.courseAll()) || [];
@@ -37,7 +38,7 @@ const StudiesPage = async () => {
                     href={`/admin/edit-course/${course.course_id}`}
                     className={styles["studies__item-button"]}
                   >
-                    Перейти к материалу
+                    <Button label="Перейти к материалу" />
                   </Link>
                 </div>
               </div>

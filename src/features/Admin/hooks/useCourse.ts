@@ -12,10 +12,6 @@ export function useCourse(courseId: string | number) {
       try {
         const res = await CourseService.courseById(String(courseId));
         setCourse(res);
-
-        console.log("Full response", res);
-
-        console.log("Курс:", courseId);
       } catch (err) {
         console.error(err);
         setError("Не удалось загрузить курс");

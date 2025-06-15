@@ -43,7 +43,7 @@ export default function StudyLayout({
     const checkEnrollment = async () => {
       try {
         const progress = await UserService.userProgress(userId);
-        // progress ожидаем массив (пример: [])
+
         if (Array.isArray(progress) && progress.length > 0) {
           setIsEnrolled(true);
         } else {
@@ -58,7 +58,6 @@ export default function StudyLayout({
     checkEnrollment();
   }, [studyId, userId]);
 
-  // Загружаем лекции только если пользователь записан
   useEffect(() => {
     if (!isEnrolled) return;
 

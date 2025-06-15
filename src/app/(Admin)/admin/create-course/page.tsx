@@ -1,6 +1,6 @@
 import Heading from "@/shared/ui/Heading/Heading";
 import styles from "./createCoursePage.module.scss";
-
+import CreateCourseForm from "@/features/Admin/ui/CreateCourse/CreateCourse";
 
 const CreateCoursePage = () => {
   return (
@@ -12,6 +12,7 @@ const CreateCoursePage = () => {
       >
         Создать курс
       </Heading>
+      <CreateCourseForm />
     </div>
   );
 };

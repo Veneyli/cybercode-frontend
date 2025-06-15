@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Categories from "@/components/Categories/Categories";
 import MediaCard from "@/components/MediaCard/MediaCard";
 import styles from "./MediaPageClient.module.scss";
@@ -13,9 +13,15 @@ interface MediaPageWrapperProps {
 }
 
 export default function MediaPageClient({ mediaData }: MediaPageWrapperProps) {
+  const publishedMedia = mediaData.filter(
+    (media) => media.isPublished === true
+  );
   const [selectedCategory, setSelectedCategory] = useState("Все");
-  const [filteredMedia, setFilteredMedia] = useState<Media[]>(mediaData);
+  const [filteredMedia, setFilteredMedia] = useState<Media[]>(publishedMedia);
 
+  const handleSearch = useCallback((filtered: Media[]) => {
+    setFilteredMedia(filtered);
+  }, []);
   return (
     <div className={styles.media}>
       <div className={styles.media__content}>
@@ -27,9 +33,9 @@ export default function MediaPageClient({ mediaData }: MediaPageWrapperProps) {
         />
 
         <SearchMedia
-          media={mediaData}
+          media={publishedMedia}
           selectedCategory={selectedCategory}
-          onSearch={setFilteredMedia}
+          onSearch={handleSearch}
         />
 
         <div className={styles.media__list}>

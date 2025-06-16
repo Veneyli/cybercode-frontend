@@ -93,13 +93,16 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleMenu }) => {
               width={200}
               height={200}
               unoptimized
-              
             />
             <h3
               className={styles.userCardName}
             >{`${user.surname} ${user.name}`}</h3>
             <p className={styles.userCardRole}>
-              {user.role === "ADMIN" ? "Администратор" : "Студент"}
+              {user.role === "ADMIN" || user.role === "TEACHER"
+                ? "Администратор"
+                : user.role === "STUDENT"
+                ? "Студент"
+                : "Преподаватель"}
             </p>
           </div>
         </div>

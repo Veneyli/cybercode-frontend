@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor } from "@tinymce/tinymce-react";
+import { Editor as TinyMCEEditor } from "@tinymce/tinymce-react";
 import styles from "./TextEditor.module.scss";
 
 interface TextEditorProps {
@@ -10,10 +10,10 @@ interface TextEditorProps {
 export default function TextEditor({ value, onChange }: TextEditorProps) {
   return (
     <div className={styles["text-editor"]}>
-      <Editor
+      <TinyMCEEditor
         apiKey="bq8p7ems2hsizrjyi9jfg2yxf03k0r2medapminv87m8knxz"
         value={value}
-        onEditorChange={(content) => onChange(content)}
+        onEditorChange={onChange}
         init={{
           min_height: 520,
           content_style: `

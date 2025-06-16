@@ -93,7 +93,9 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ toggleMenu }) => {
               className={styles["sidebar-admin__user-card-name"]}
             >{`${user.surname} ${user.name}`}</h3>
             <p className={styles["sidebar-admin__user-card-role"]}>
-              {user.role === "ADMIN" || "Администратор"}
+              {user.role === "ADMIN" || user.role === "TEACHER"
+                ? "Администратор"
+                : "Преподаватель"}
             </p>
           </div>
         </div>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import ImageUploader from "@/shared/ui/ImageUploader/ImageUploader";
 import styles from "./CreatePost.module.scss";
 import Field from "@/shared/ui/Field/Field";
-import TextEditor from "@/shared/ui/TextEditor/TextEditor";
+import TextEditor from "@/shared/ui/TextEditor/DynamicEditor";
 import Image from "next/image";
 import Button from "@/shared/ui/Button/Button";
 import { useRouter } from "next/navigation";
@@ -50,22 +50,25 @@ const CreatePost: React.FC = () => {
   };
 
   return (
-    <div className={styles["edit-post"]}>
+    <div className={styles["create-post"]}>
       <Field
         label="Заголовок"
         name="title"
         value={formData.title}
         onChange={(e) => handleChange("title", e.target.value)}
       />
-      <div>
-        <label htmlFor="description">Описание</label>
+      <div className={styles["create-post__field"]}>
+        <label className={styles["create-post__label"]} htmlFor="description">
+          Описание
+        </label>
         <textarea
           id="description"
+          className={styles["create-post__textarea"]}
           value={formData.description}
           onChange={(e) => handleChange("description", e.target.value)}
         />
       </div>
-      <div className={styles["edit-post__image"]}>
+      <div className={styles["create-post__image-wrapper"]}>
         {formData.image_url && (
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}${formData.image_url}`}
@@ -114,8 +117,8 @@ const CreatePost: React.FC = () => {
         <option value="true">Опубликован</option>
       </Field>
 
-      <div className={styles["edit-post__actions"]}>
-        <div className={styles["edit-post__buttons"]}>
+      <div className={styles["create-post__actions"]}>
+        <div className={styles["create-post__buttons"]}>
           <Button
             label={isSaving ? "Сохранение..." : "Создать"}
             onClick={handleSave}

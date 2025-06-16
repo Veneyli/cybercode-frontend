@@ -38,4 +38,13 @@
   &__heading {
     margin-bottom: 20px;
   }
+  &__buttons {
+    display: flex;
+    gap: 10px;
+  }
+  &__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
 }

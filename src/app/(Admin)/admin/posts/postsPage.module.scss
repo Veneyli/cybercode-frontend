@@ -2,6 +2,10 @@
 @use "@/styles/mixins" as mixin;
 
 .posts {
+  position: relative;
+  &__title {
+    margin-bottom: 30px;
+  }
   &__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -40,5 +44,10 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
+  }
+  &__create-button {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import ImageUploader from "@/shared/ui/ImageUploader/ImageUploader";
 import styles from "./EditPost.module.scss";
 import Field from "@/shared/ui/Field/Field";
-import TextEditor from "@/shared/ui/TextEditor/TextEditor";
+import TextEditor from "@/shared/ui/TextEditor/DynamicEditor";
 import Image from "next/image";
 import { Media } from "@/shared/types/media.types";
 import Button from "@/shared/ui/Button/Button";

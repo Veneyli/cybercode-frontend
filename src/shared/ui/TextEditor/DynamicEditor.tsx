@@ -2,4 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-export const Editor = dynamic(() => import("./TextEditor"), { ssr: false });
+const DynamicTextEditor = dynamic(() => import("./TextEditor"), {
+  ssr: false,
+});
+
+export default DynamicTextEditor;

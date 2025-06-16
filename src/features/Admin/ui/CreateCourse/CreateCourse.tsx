@@ -197,8 +197,9 @@ export default function CreateCourseForm() {
           <option value="advanced">Продвинутый</option>
         </Field>
       </div>
-
-      <Button label="Создать курс" type="submit" />
+      <div>
+        <Button label="Создать курс" type="submit" />
+      </div>
     </form>
   );
 }

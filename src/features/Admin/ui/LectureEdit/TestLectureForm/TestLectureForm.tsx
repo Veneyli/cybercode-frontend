@@ -10,13 +10,14 @@ import Field from "@/shared/ui/Field/Field";
 import { TestService } from "@/shared/services/test.service";
 import { LectureService } from "@/shared/services/lecture.service";
 import Heading from "@/shared/ui/Heading/Heading";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 type Props = {
   lecture: Lecture;
 };
 
 export default function TestLectureForm({ lecture }: Props) {
+  const router = useRouter();
   const [questions, setQuestions] = useState<TestQuestion[]>([]);
   const [title, setTitle] = useState(lecture.title ?? "");
   const [description, setDescription] = useState(lecture.description ?? "");
@@ -141,12 +142,12 @@ export default function TestLectureForm({ lecture }: Props) {
         />
       ))}
       <Button label="Добавить вопрос" onClick={addQuestion} />
-      <Button label="Сохранить тест" onClick={handleSave} />
-      <div className={styles["text-lecture-form__actions"]}>
-        <div className={styles["text-lecture-form__buttons"]}>
+      <div className={styles["test-lecture-form__actions"]}>
+        <div className={styles["test-lecture-form__buttons"]}>
+          <Button label="Сохранить тест" onClick={handleSave} />
           <Button label="Отмена" variant="bordered" onClick={handleCancel} />
         </div>
-        <div className={styles["text-lecture-form__delete"]}>
+        <div className={styles["test-lecture-form__delete"]}>
           <Button variant="remove" label="Удалить" onClick={handleDelete} />
         </div>
       </div>

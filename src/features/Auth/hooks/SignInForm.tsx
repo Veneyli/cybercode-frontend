@@ -44,8 +44,16 @@ export const useSignInForm = () => {
     }
 
     try {
-      await AuthService.login(formData);
-      router.push("/profile");
+      const response = await AuthService.login(formData);
+
+      const role = response?.user?.role;
+      console.log(role, response.user);
+      if (role === "ADMIN" || role === "TEACHER") {
+        router.push("/admin");
+      } else {
+        router.push("/profile");
+      }
+
       return true;
     } catch (err: unknown) {
       if (err instanceof Error) {

@@ -43,4 +43,12 @@
       color: var(--font-color-1);
     }
   }
+  &__buttons {
+    display: flex;
+    gap: 10px;
+  }
+  &__actions {
+    display: flex;
+    gap: 10px;
+  }
 }

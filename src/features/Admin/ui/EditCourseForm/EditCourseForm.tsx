@@ -11,13 +11,14 @@ import { useCourse } from "@/admin/hooks/useCourse";
 import { Module } from "@/shared/types/module.types";
 import ModulesEditor from "@/features/Admin/ui/ModuleEditor/ModuleEditor";
 import { CourseService } from "@/shared/services/course.service";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 interface EditCourseFormProps {
   courseId: number;
 }
 
 export default function EditCourseForm({ courseId }: EditCourseFormProps) {
+  const router = useRouter();
   const { course, isLoading } = useCourse(courseId);
 
   const { updateCourse } = useUpdateCourse(courseId);
@@ -82,8 +83,7 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
     await updateCourse(form);
   };
   const handleCancel = () => {
-    router.back();
-    // Или router.push("/admin/courses");
+    router.push("/admin/courses");
   };
 
   const handleDelete = async () => {
@@ -251,12 +251,14 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
           onChange={(modules) => setForm((prev) => ({ ...prev, modules }))}
         />
       </div>
-      <div className={styles["edit-course__buttons"]}>
-        <Button label="Сохранить курс" type="submit" />
-        <Button label="Отмена" variant="bordered" onClick={handleCancel} />
-      </div>
-      <div className={styles["edit-course__delete"]}>
-        <Button label="Удалить" variant="remove" onClick={handleDelete} />
+      <div className={styles["edit-course__actions"]}>
+        <div className={styles["edit-course__buttons"]}>
+          <Button label="Сохранить курс" type="submit" />
+          <Button label="Отмена" variant="bordered" onClick={handleCancel} />
+        </div>
+        <div className={styles["edit-course__delete"]}>
+          <Button label="Удалить" variant="remove" onClick={handleDelete} />
+        </div>
       </div>
     </form>
   );

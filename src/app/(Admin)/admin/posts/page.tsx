@@ -10,6 +10,11 @@ const PostsPage = async () => {
   const posts: Media[] = (await MediaService.media()) || [];
   return (
     <div className={styles["posts"]}>
+      <div className={styles["posts__create-button"]}>
+        <Link href="/admin/create-post">
+          <Button label="Создать пост" />
+        </Link>
+      </div>
       <Heading align="center" level={1} className={styles["posts__title"]}>
         Управление постами
       </Heading>

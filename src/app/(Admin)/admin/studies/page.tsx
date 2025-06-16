@@ -10,6 +10,11 @@ const StudiesPage = async () => {
   const courses: Course[] = (await CourseService.courseAll()) || [];
   return (
     <div className={styles["studies"]}>
+      <div className={styles["studies__create-button"]}>
+        <Link href="/admin/create-course">
+          <Button label="Создать курс" />
+        </Link>
+      </div>
       <Heading align="center" level={1} className={styles["studies__title"]}>
         Учебные материалы
       </Heading>

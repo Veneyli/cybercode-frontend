@@ -5,15 +5,16 @@ import { Lecture } from "@/shared/types/lecture.types";
 import Field from "@/shared/ui/Field/Field";
 import Button from "@/shared/ui/Button/Button";
 import { LectureService } from "@/shared/services/lecture.service";
-import TextEditor from "@/shared/ui/TextEditor/TextEditor";
+import TextEditor from "@/shared/ui/TextEditor/DynamicEditor";
 import styles from "./TextLectureForm.module.scss";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 type Props = {
   lecture: Lecture;
 };
 
 export default function TextLectureForm({ lecture }: Props) {
+  const router = useRouter();
   const [title, setTitle] = useState(lecture.title);
   const [description, setDescription] = useState(lecture.description ?? "");
   const [content, setContent] = useState("");

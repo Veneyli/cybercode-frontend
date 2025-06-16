@@ -92,6 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleMenu }) => {
               alt="user"
               width={200}
               height={200}
+              unoptimized
             />
             <h3
               className={styles.userCardName}

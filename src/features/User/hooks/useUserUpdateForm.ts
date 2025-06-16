@@ -19,42 +19,40 @@ export const useUserUpdateForm = () => {
     password: "",
     confirmPassword: "",
   });
-
+  const [isLoading, setIsLoading] = useState(true);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { validateField } = useFieldValidation();
-
-  const [isLoading] = useState(true);
-
   useEffect(() => {
     if (!userId) return;
 
-    const loadUser = async () => {
+    const fetchUser = async () => {
       try {
-        if (!userId) {
-          console.error("userId не найден");
-          return;
-        }
-
-        const updateData = {
-          ...formData,
-          image: imageFile ?? undefined,
-        };
-
-        await UserService.updateUser(userId, updateData);
-        router.refresh();
-      } catch (e) {
-        console.error("Ошибка при сохранении:", e);
+        const data = await UserService.getUser(userId);
+        console.log(data);
+        setFormData({
+          surname: data.surname || "",
+          name: data.name || "",
+          patronymic: data.patronymic || "",
+          email: data.email || "",
+          image_url: data.image_url || "",
+          gender: data.gender || "",
+          birthdate: data.birthdate || "",
+          password: "",
+          confirmPassword: "",
+        });
+      } catch (error) {
+        console.error("Ошибка при загрузке пользователя", error);
       } finally {
-        setIsSubmitting(false);
+        setIsLoading(false);
       }
     };
 
-    loadUser();
-  }, [formData, imageFile, router, userId]);
+    fetchUser();
+  }, [userId]);
 
   const handleChange = (name: string, value: string, file?: File) => {
     setFormData((prev) => ({ ...prev, [name]: value }));

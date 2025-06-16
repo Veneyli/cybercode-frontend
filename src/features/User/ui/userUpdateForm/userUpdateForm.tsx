@@ -10,11 +10,17 @@ import Image from "next/image";
 import { format } from "date-fns";
 
 export const UserUpdateForm = () => {
-  const { formData, errors, isSubmitting, handleChange, handleSubmit } =
-    useUserUpdateForm();
-  // if (isLoading) {
-  //   return <div>Загрузка...</div>;
-  // }
+  const {
+    formData,
+    errors,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+    isLoading,
+  } = useUserUpdateForm();
+  if (isLoading) {
+    return <div>Загрузка...</div>;
+  }
   const formattedBirthdate =
     formData.birthdate && typeof formData.birthdate === "string"
       ? formData.birthdate.slice(0, 10)

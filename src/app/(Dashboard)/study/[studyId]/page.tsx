@@ -55,14 +55,6 @@ const StudyDetailsPage = async (props: {
                     className={styles["study-page__technologies-item"]}
                     key={idx}
                   >
-                    <Image
-                      className={styles["study-page__technologies-item-image"]}
-                      src={`/images/icon/${technology.toLowerCase()}.png`}
-                      alt={technology}
-                      width={30}
-                      height={30}
-                      unoptimized
-                    />
                     <p className={styles["study-page__technologies-item-text"]}>
                       {technology}
                     </p>
@@ -90,7 +82,11 @@ const StudyDetailsPage = async (props: {
           <div className={styles["study-page__image-wrapper"]}>
             <Image
               className={styles["study-page__image"]}
-              src={course.image_url || "/images/placeholder.jpg"}
+              src={
+                course.image_url
+                  ? `${process.env.NEXT_PUBLIC_API_URL}${course.image_url}`
+                  : "/images/placeholder.jpeg"
+              }
               alt={course.title}
               width={500}
               height={400}

@@ -6,6 +6,8 @@ import { Media } from "@/types/media.types";
 import Link from "next/dist/client/link";
 import Button from "@/shared/ui/Button/Button";
 
+export const dynamic = "force-dynamic";
+
 const PostsPage = async () => {
   const posts: Media[] = (await MediaService.media()) || [];
   return (
@@ -24,7 +26,11 @@ const PostsPage = async () => {
             <div key={post.media_id} className={styles["posts__item"]}>
               <div className={styles["posts__item-image-wrapper"]}>
                 <Image
-                  src={post.image_url || "/images/placeholder.jpg"}
+                  src={
+                    post.image_url
+                      ? `${process.env.NEXT_PUBLIC_API_URL}${post.image_url}`
+                      : "/images/placeholder.jpeg"
+                  }
                   alt="Описание изображения"
                   width={300}
                   height={200}

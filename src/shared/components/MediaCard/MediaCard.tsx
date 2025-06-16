@@ -12,7 +12,11 @@ const MediaCard = (props: Media) => {
           <p>{props.category}</p>
         </div>
         <Image
-          src={props.image_url || "/images/placeholder.jpg"}
+          src={
+            props.image_url
+              ? `${process.env.NEXT_PUBLIC_API_URL}${props.image_url}`
+              : "/images/placeholder.jpeg"
+          }
           alt={props.title}
           className={styles.card__image}
           width={500}

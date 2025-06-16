@@ -4,6 +4,8 @@ import { CourseService } from "@/services/course.service";
 import { Course } from "@/shared/types/course.types";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Cybercode: Каталог курсов",
   description: "Каталог курсов на платформе Cybercode",

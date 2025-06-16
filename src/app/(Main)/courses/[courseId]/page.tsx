@@ -37,17 +37,6 @@ const CoursePage = async (props: Props) => {
                   key={index}
                   className={styles["course__technologies-item"]}
                 >
-                  <Image
-                    src={
-                      courseData.image_url
-                        ? `${process.env.NEXT_PUBLIC_API_URL}${courseData.image_url}`
-                        : "/images/placeholder.jpeg"
-                    }
-                    width={20}
-                    height={20}
-                    alt={technology}
-                    unoptimized
-                  ></Image>
                   {technology}
                 </div>
               ))}

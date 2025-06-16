@@ -6,6 +6,8 @@ import { CourseService } from "@/shared/services/course.service";
 import { Course } from "@/types/course.types";
 import Button from "@/shared/ui/Button/Button";
 
+export const dynamic = "force-dynamic";
+
 const StudiesPage = async () => {
   const courses: Course[] = (await CourseService.courseAll()) || [];
   return (
@@ -25,7 +27,11 @@ const StudiesPage = async () => {
               <div key={course.course_id} className={styles["studies__item"]}>
                 <div className={styles["studies__item-images"]}>
                   <Image
-                    src={"/images/placeholder.jpg"}
+                    src={
+                      course.image_url
+                        ? `${process.env.NEXT_PUBLIC_API_URL}${course.image_url}`
+                        : "/images/placeholder.jpeg"
+                    }
                     alt="Описание изображения"
                     width={300}
                     height={200}

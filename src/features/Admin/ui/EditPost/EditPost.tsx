@@ -95,6 +95,7 @@ const EditPost: React.FC<EditPostPageProps> = ({ post }) => {
             width={200}
             height={150}
             className={styles["edit-post__image-preview"]}
+            unoptimized
           />
         )}
         <ImageUploader

@@ -28,7 +28,6 @@ const HeroSection = () => {
                 <span className={styles.star}>&#9733;</span>
                 Начать учиться!
               </Link>
-              {/* <Button size="large" label="Начать учиться!" /> */}
               <Link
                 className={`${styles["hero__button"]} ${styles["hero__button-outline"]}`}
                 href="/courses"
@@ -45,6 +44,7 @@ const HeroSection = () => {
               width={600}
               height={600}
               priority
+              unoptimized
             />
           </div>
         </div>

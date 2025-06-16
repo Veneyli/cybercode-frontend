@@ -1,7 +1,7 @@
 @use "@/app/styles/mixins.scss" as mixins;
 @use "@/app/styles/variables.scss" as vars;
 
-.sign-in {
+.sign-up {
   color: var(--font-color-1);
   &__title {
     text-align: center;
@@ -19,5 +19,8 @@
     &-link {
       color: vars.$color-button;
     }
+  }
+  &__back {
+    color: vars.$color-primary;
   }
 }

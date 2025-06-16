@@ -14,6 +14,7 @@ const FilterCoursesClient = ({
 }) => {
   const [coursesData, setCoursesData] = useState<Course[]>(initialCourses);
   const [searchQuery] = useState("");
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   const handleFilterResult = (filteredCourses: Course[]) => {
     const filtered = searchQuery
@@ -27,9 +28,23 @@ const FilterCoursesClient = ({
 
   return (
     <>
-      <div className={styles["courses__filter"]}>
+      <div className={styles["courses__mobile-toggle"]}>
+        <button
+          className={styles["courses__toggle-button"]}
+          onClick={() => setIsFilterVisible((prev) => !prev)}
+        >
+          {isFilterVisible ? "Скрыть фильтр" : "Показать фильтр"}
+        </button>
+      </div>
+
+      <div
+        className={`${styles["courses__filter"]} ${
+          isFilterVisible ? styles["visible"] : ""
+        }`}
+      >
         <FilterCourses onResult={handleFilterResult} />
       </div>
+
       <div className={styles["courses__content"]}>
         <Heading level={1} className={styles["courses__title"]}>
           Каталог

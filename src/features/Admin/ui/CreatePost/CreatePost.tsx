@@ -72,6 +72,7 @@ const CreatePost: React.FC = () => {
             alt="Превью"
             width={200}
             height={150}
+            unoptimized
           />
         )}
         <ImageUploader

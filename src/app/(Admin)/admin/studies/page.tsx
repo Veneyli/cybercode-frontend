@@ -25,6 +25,7 @@ const StudiesPage = async () => {
                     width={300}
                     height={200}
                     className={styles["studies__item-image"]}
+                    unoptimized
                   />
                 </div>
                 <div className={styles["studies__item-info"]}>

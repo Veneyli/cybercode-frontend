@@ -7,6 +7,7 @@ import styles from "./MediaPageClient.module.scss";
 import { format } from "date-fns";
 import { Media } from "@/types/media.types";
 import SearchMedia from "@/widget/SearchMedia/SearchMedia";
+import Heading from "@/shared/ui/Heading/Heading";
 
 interface MediaPageWrapperProps {
   mediaData: Media[];
@@ -25,7 +26,9 @@ export default function MediaPageClient({ mediaData }: MediaPageWrapperProps) {
   return (
     <div className={styles.media}>
       <div className={styles.media__content}>
-        <h1 className={styles["media__content-title"]}>Медиа</h1>
+        <Heading level={1} className={styles["media__content-title"]}>
+          Медиа
+        </Heading>
 
         <Categories
           selectedCategory={selectedCategory}

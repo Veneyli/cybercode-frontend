@@ -6,6 +6,9 @@ export default function SignInPage() {
   return (
     <main className={styles["sign-in"]}>
       <div className={styles["sign-in__container"]}>
+        <Link href="/" className={styles["sign-in__back"]}>
+          Вернуться на главную
+        </Link>
         <h1 className={styles["sign-in__title"]}>Вход в аккаунт</h1>
         <SignInForm />
         <div className={styles["sign-in__footer"]}>

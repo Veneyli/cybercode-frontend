@@ -72,6 +72,7 @@ const CourseUserCard = ({
             height={200}
             alt={course.title}
             className={styles["course-card__image"]}
+            unoptimized
           />
         </div>
         <div className={styles["course-card__info"]}>

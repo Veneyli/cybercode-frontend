@@ -18,6 +18,7 @@ const EducationSection = () => {
               className={styles["education__image"]}
               width={500}
               height={350}
+              unoptimized
             />
             <p className={styles["education__description"]}>
               {item.description}

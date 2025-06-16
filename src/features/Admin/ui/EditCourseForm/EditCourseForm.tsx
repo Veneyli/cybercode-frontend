@@ -90,8 +90,8 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
     if (confirm("Вы уверены, что хотите удалить этот курс?")) {
       try {
         await CourseService.deleteCourse(courseId.toString());
-        router.push("/admin/courses"); 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        router.push("/admin/courses");
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         alert("Ошибка при удалении курса");
       }
@@ -122,6 +122,7 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
             alt="Course Image"
             width={200}
             height={200}
+            unoptimized
           />
           <ImageUploader
             value={form.image_url}

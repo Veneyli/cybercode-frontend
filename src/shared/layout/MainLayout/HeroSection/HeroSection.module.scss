@@ -46,6 +46,7 @@
   &__buttons {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
   }
   &__button {
     text-decoration: none;
@@ -140,12 +141,12 @@
 @media screen and (max-width: 800px) {
   .hero {
     &__content {
-      flex-direction: column-reverse;
+      flex-direction: column;
       gap: 30px;
     }
 
     &__image {
-      width: 60%;
+      width: 100%;
       &File {
         height: 100%;
         width: 100%;

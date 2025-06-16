@@ -6,6 +6,12 @@ import DOMPurify from "isomorphic-dompurify";
 import { MediaService } from "@/services/media.service";
 import { Media } from "@/types/media.types";
 import { JSDOM } from "jsdom";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cybercode: Медиа",
+  description: "Каталог медиа на платформе Cybercode",
+};
 
 interface Props {
   params: Promise<{ mediaId: string }>;
@@ -62,6 +68,7 @@ const MediaDetailsPage = async (props: Props) => {
             alt={postData.title}
             width={1000}
             height={600}
+            unoptimized
           />
         </div>
 

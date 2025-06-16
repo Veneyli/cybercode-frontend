@@ -10,4 +10,11 @@
   gap: 30px;
   min-height: 970px;
   color: var(--font-color-1);
+  position: relative;
+}
+@media screen and (max-width: 768px) {
+  .courses {
+    flex-direction: column;
+    padding: 0;
+  }
 }

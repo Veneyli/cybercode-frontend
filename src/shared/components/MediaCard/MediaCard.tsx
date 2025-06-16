@@ -17,6 +17,7 @@ const MediaCard = (props: Media) => {
           className={styles.card__image}
           width={500}
           height={500}
+          unoptimized
         />
         <div className={styles.card__content}>
           <h3 className={styles.card__title}>{props.title}</h3>

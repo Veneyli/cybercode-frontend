@@ -28,11 +28,14 @@ const LecturePage = async (props: {
         Описание лекции: {lecture.description}
       </p>
       {lecture.type === "CODE" && (
-        <CodeEditor
-          lecture={lecture}
-          userId={user.user_id}
-          lectureId={lecture.lecture_id}
-        />
+        <div>
+          <CodeEditor
+            lecture={lecture}
+            userId={user.user_id}
+            lectureId={lecture.lecture_id}
+          />
+          <LectureBlock userId={user.user_id} lecture={lecture} />
+        </div>
       )}
       {(lecture.type === "TEXT" || lecture.type === "OTHER") && (
         <LectureBlock userId={user.user_id} lecture={lecture} />
@@ -47,17 +50,20 @@ const LecturePage = async (props: {
       )}
       {lecture.type === "VIDEO" &&
         (lecture.video_url ? (
-          <FlexibleVideo
-            userId={user.user_id}
-            url={lecture.video_url}
-            lectureId={lecture.lecture_id}
-          />
+          <div>
+            <FlexibleVideo
+              userId={user.user_id}
+              url={
+                lecture.video_url
+                  ? `${process.env.NEXT_PUBLIC_API_URL}${lecture.video_url}`
+                  : "/images/placeholder.jpeg"
+              }
+              lectureId={lecture.lecture_id}
+            />
+            <LectureBlock userId={user.user_id} lecture={lecture} />
+          </div>
         ) : (
-          <FlexibleVideo
-            userId={user.user_id}
-            url={lecture.video_url}
-            lectureId={lecture.lecture_id}
-          />
+          <p>Видео еще не добавлено.</p>
         ))}
     </div>
   );

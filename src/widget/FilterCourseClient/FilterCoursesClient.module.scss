@@ -10,40 +10,59 @@
   gap: 30px;
   min-height: 970px;
   color: var(--font-color-1);
+  flex-wrap: wrap;
+
   &__filter {
     @include mixins.container($border: 30px, $padding: 30px);
     width: 200px;
     flex: 3;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      display: none;
+      &.visible {
+        display: block;
+      }
+    }
   }
 
   &__content {
     flex: 10;
+    width: 100%;
   }
+
   &__list {
     display: grid;
-    // grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  &-search {
-    @include mixins.container(
-      $padding: 20px,
-      $gap: 10px,
-      $flex: row,
-      $border: 30px
-    );
-    position: relative;
+
+  &__mobile-toggle {
+    display: none;
     width: 100%;
-    margin-bottom: 20px;
-    &__input {
-      @include mixins.input-focus(vars.$color-input-focus);
-      flex: 1;
-      padding: 10px 20px;
-      border-radius: 30px;
-      background-color: var(--color-input-bg);
-      color: var(--font-color-1);
-      border: 1px solid vars.$color-input-border;
-      font-size: 18px;
-      z-index: 11;
+    margin-bottom: 15px;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+
+  &__toggle-button {
+    background-color: vars.$color-primary;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: absolute;
+    top: 45px;
+    right: 10px;
+
+    &:hover {
+      background-color: color.scale(vars.$color-primary, $lightness: -10%);
     }
   }
 }

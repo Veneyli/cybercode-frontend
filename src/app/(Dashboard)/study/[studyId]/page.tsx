@@ -61,6 +61,7 @@ const StudyDetailsPage = async (props: {
                       alt={technology}
                       width={30}
                       height={30}
+                      unoptimized
                     />
                     <p className={styles["study-page__technologies-item-text"]}>
                       {technology}
@@ -93,6 +94,7 @@ const StudyDetailsPage = async (props: {
               alt={course.title}
               width={500}
               height={400}
+              unoptimized
             />
           </div>
         )}

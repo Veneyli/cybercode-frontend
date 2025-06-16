@@ -6,9 +6,9 @@
   max-width: 1520px;
   margin: 0 auto;
   &__list {
-    display: flex;
+    display: grid;
     gap: 50px;
-    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
   }
   &__item {
     flex: 1;
@@ -26,6 +26,13 @@
       left: 10px;
       transform: translate(-50%, -50%);
       line-height: 0;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .advantage {
+    &__list {
+      grid-template-columns: 1fr;
     }
   }
 }

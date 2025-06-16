@@ -19,3 +19,13 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .study {
+    &__courses {
+      &-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}

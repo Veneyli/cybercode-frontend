@@ -72,10 +72,11 @@ const Footer = React.memo(() => {
           <div className={styles.footer__section}>
             <Link href="/" className={styles.footer__logo}>
               <Image
-                src="/images/header/logo.png"
+                src="/images/logo.png"
                 alt="CyberCode logo"
                 width={50}
                 height={35}
+                unoptimized
               />
               <span className={styles.footer__brand}>CyberCode</span>
             </Link>

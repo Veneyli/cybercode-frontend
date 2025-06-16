@@ -40,6 +40,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, index }) => {
           className={styles["card__image"]}
           width={150}
           height={150}
+          unoptimized
         />
       </div>
     </Link>

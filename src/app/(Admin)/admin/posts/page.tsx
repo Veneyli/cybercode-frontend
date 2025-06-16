@@ -24,6 +24,7 @@ const PostsPage = async () => {
                   width={300}
                   height={200}
                   className={styles["posts__item-image"]}
+                  unoptimized
                 />
               </div>
               <Heading level={2} className={styles["posts__item-title"]}>

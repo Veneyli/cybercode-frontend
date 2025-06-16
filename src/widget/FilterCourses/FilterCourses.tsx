@@ -11,7 +11,11 @@ const technologies = [
   "React",
   "Node.js",
 ];
-const levels = ["Новичок", "Средний", "Продвинутый"];
+const levels = {
+  beginner: "Новичок",
+  intermediate: "Средний",
+  advanced: "Продвинутый",
+};
 
 const FilterCourses = ({ onResult }) => {
   const [selectedTechnology, setSelectedTechnology] = useState<string[]>([]);
@@ -49,22 +53,24 @@ const FilterCourses = ({ onResult }) => {
             />
             Все
           </label>
-          {levels.map((level) => (
-            <label
-              key={level}
-              className={styles["courses-filter__radio-label"]}
-            >
-              <input
-                type="radio"
-                name="level"
-                value={level}
-                checked={selectedLevel === level}
-                onChange={() => setSelectedLevel(level)}
-                className={styles["courses-filter__radio"]}
-              />
-              {level}
-            </label>
-          ))}
+          {Object.entries(levels).map(
+            ([levelKey, levelLabel]: [string, string]) => (
+              <label
+                key={levelKey}
+                className={styles["courses-filter__radio-label"]}
+              >
+                <input
+                  type="radio"
+                  name="level"
+                  value={levelKey}
+                  checked={selectedLevel === levelKey}
+                  onChange={() => setSelectedLevel(levelKey)}
+                  className={styles["courses-filter__radio"]}
+                />
+                {levelLabel}
+              </label>
+            )
+          )}
         </div>
       </div>
 

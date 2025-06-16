@@ -29,3 +29,21 @@
     }
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .user-update-form {
+    &__content {
+      flex-direction: column;
+      gap: 50px;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .user-update-form {
+    &__avatar {
+      &-container {
+        flex-direction: column;
+      }
+    }
+  }
+}

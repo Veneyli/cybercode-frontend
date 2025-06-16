@@ -54,6 +54,7 @@ export const UserUpdateForm = () => {
                 className={styles["user-update-form__avatar"]}
                 width={200}
                 height={200}
+                unoptimized
               />
             </div>
             <ImageUploader

@@ -27,3 +27,18 @@
     margin-top: 10px;
   }
 }
+
+@media screen and (max-width: 1300px) {
+  .education {
+    &__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .education {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}

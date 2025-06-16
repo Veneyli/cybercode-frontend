@@ -41,6 +41,7 @@ const CourseCardProfile: React.FC<CourseCardProps> = ({ course, index }) => {
             className={styles["card__image"]}
             width={200}
             height={200}
+            unoptimized
           />
         </div>
       </div>

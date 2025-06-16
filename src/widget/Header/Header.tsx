@@ -53,11 +53,12 @@ const Header = React.memo(() => {
       <div className={styles["header__container"]}>
         <Link className={styles["header__logo"]} href="/">
           <Image
-            src="/images/header/logo.png"
+            src="/images/logo.png"
             className={styles["header__logo-image"]}
             alt="logo"
             width={75}
             height={50}
+            unoptimized
           />
         </Link>
         <p className={styles["header__brand"]}>

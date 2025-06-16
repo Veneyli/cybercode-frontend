@@ -89,6 +89,7 @@ export default function CreateCourseForm() {
             alt="Course Image"
             width={200}
             height={200}
+            unoptimized
           />
           <ImageUploader
             value={form.image_url}

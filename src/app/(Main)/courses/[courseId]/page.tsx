@@ -46,6 +46,7 @@ const CoursePage = async (props: Props) => {
                     width={20}
                     height={20}
                     alt={technology}
+                    unoptimized
                   ></Image>
                   {technology}
                 </div>
@@ -65,6 +66,7 @@ const CoursePage = async (props: Props) => {
             height={500}
             alt={courseData.title}
             className={styles["course__content-image"]}
+            unoptimized
           ></Image>
         </div>
       </div>

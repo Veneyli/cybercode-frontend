@@ -100,7 +100,7 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleMenu }) => {
             <p className={styles.userCardRole}>
               {user.role === "ADMIN" || user.role === "TEACHER"
                 ? "Администратор"
-                : user.role === "STUDENT"
+                : user.role === "REGULAR"
                 ? "Студент"
                 : "Преподаватель"}
             </p>

@@ -8,6 +8,8 @@ import CourseCardProfile from "@/components/CourseCardProfile/CourseCardProfile"
 import { getServerSession } from "@/lib/getServerSession";
 import { UserService } from "@/shared/services/user.service";
 
+export const dynamic = "force-dynamic";
+
 interface UserCourseProgress {
   course_id: number;
   progress: number;

@@ -40,62 +40,14 @@
     }
   }
 }
-.program {
-  border: 1px solid #672bff;
-  border-radius: 20px;
-  overflow: hidden;
-  &:first-child {
-    border-top: none;
+@media screen and (max-width: 1200px) {
+  .course {
+    &__content {
+      flex-direction: column;
+    }
+    &__image {
+      width: 100%;
+      height: auto;
+    }
   }
-}
-.accordion {
-  cursor: pointer;
-  padding: 20px;
-  width: 100%;
-  text-align: left;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.3);
-  border: none;
-  /*transition: 0.5s;*/
-  border-top: 1px solid #672bff;
-  font-size: 18px;
-  color: var(--font-color-1);
-  // &:first-child {
-  //   border-top: none;
-  // }
-}
-.active {
-  border: 1px solid #672bff;
-  background-color: rgba(132, 0, 255, 0.2);
-  box-shadow: 0 0 0 4px rgba(132, 0, 255, 0.2);
-}
-.accordion:after {
-  content: "\002B";
-  font-weight: bold;
-  float: right;
-  margin-left: 5px;
-}
-.active:after {
-  content: "\2212";
-}
-.panel {
-  line-height: 25px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-out;
-  &:first-child {
-    border-top: none;
-  }
-}
-.panel-content {
-  padding: 40px;
-}
-.module-text {
-  padding: 10px;
-}
-.module-list-items {
-  margin: 10px 20px;
-}
-.module-list-item {
-  margin: 10px 0;
 }

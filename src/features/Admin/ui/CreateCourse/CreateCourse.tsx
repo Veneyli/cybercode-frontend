@@ -54,7 +54,6 @@ export default function CreateCourseForm() {
     e.preventDefault();
     try {
       const createdCourse = await CourseService.create(form);
-      console.log("Created course:", createdCourse);
       if (createdCourse && createdCourse.course_id) {
         router.push(`/admin/edit-course/${createdCourse.course_id}`);
       } else {
@@ -192,9 +191,9 @@ export default function CreateCourseForm() {
           type="select"
         >
           <option value="">Выберите уровень</option>
-          <option value="beginner">Новичок</option>
-          <option value="intermediate">Средний</option>
-          <option value="advanced">Продвинутый</option>
+          <option value="Новичок">Новичок</option>
+          <option value="Средний">Средний</option>
+          <option value="Продвинутый">Продвинутый</option>
         </Field>
       </div>
       <div>

@@ -18,7 +18,7 @@ export default function CodeLectureForm({ lecture }: Props) {
   const router = useRouter();
   const [title, setTitle] = useState(lecture.title);
   const [description, setDescription] = useState(lecture.description ?? "");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(lecture.content ?? "");
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async (e?: React.MouseEvent<HTMLButtonElement>) => {
@@ -29,6 +29,7 @@ export default function CodeLectureForm({ lecture }: Props) {
       await LectureService.updateLecture(lecture.lecture_id, {
         title,
         description,
+        content,
       });
       alert("Лекция обновлена");
     } catch (err) {

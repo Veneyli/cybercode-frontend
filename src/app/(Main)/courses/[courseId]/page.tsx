@@ -5,6 +5,8 @@ import { Course } from "@/shared/types/course.types";
 import Heading from "@/shared/ui/Heading/Heading";
 import CourseProgram from "@/shared/components/CourseProgramm/CourseProgramm";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ courseId: string }>;
 }

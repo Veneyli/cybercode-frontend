@@ -2,6 +2,8 @@ import Heading from "@/shared/ui/Heading/Heading";
 import styles from "./createCoursePage.module.scss";
 import CreateCourseForm from "@/features/Admin/ui/CreateCourse/CreateCourse";
 
+export const dynamic = "force-dynamic";
+
 const CreateCoursePage = () => {
   return (
     <div className={styles["create-course"]}>

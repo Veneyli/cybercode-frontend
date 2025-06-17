@@ -83,7 +83,7 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
     await updateCourse(form);
   };
   const handleCancel = () => {
-    router.push("/admin/courses");
+    router.push("/admin/studies");
   };
 
   const handleDelete = async () => {
@@ -224,9 +224,9 @@ export default function EditCourseForm({ courseId }: EditCourseFormProps) {
           type="select"
         >
           <option value="">Выберите уровень</option>
-          <option value="beginner">Новичок</option>
-          <option value="intermediate">Средний</option>
-          <option value="advanced">Продвинутый</option>
+          <option value="Новичок">Новичок</option>
+          <option value="Средний">Средний</option>
+          <option value="Продвинутый">Продвинутый</option>
         </Field>
       </div>
       <Field

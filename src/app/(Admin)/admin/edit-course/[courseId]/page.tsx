@@ -1,6 +1,9 @@
 import Heading from "@/shared/ui/Heading/Heading";
 import styles from "./editCoursePage.module.scss";
 import EditCourseForm from "@/features/Admin/ui/EditCourseForm/EditCourseForm";
+
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ courseId: string }>;
 }

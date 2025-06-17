@@ -5,6 +5,9 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 export const metadata: Metadata = {
   title: "Cybercode",
   description: "Онлайн-курс по программированию",
+  icons: {
+    icon: "/images/favicon.ico",
+  },
 };
 
 export default function RootLayout({

@@ -9,10 +9,14 @@ import { EnrollButton } from "@/widget/EnrollButton/EnrollButton";
 import Heading from "@/shared/ui/Heading/Heading";
 import CourseProgramStatic from "@/shared/components/CourseProgrammStatic/CourseProgrammStatic";
 import { LectureService } from "@/shared/services/lecture.service";
+
+export const dynamic = "force-dynamic";
+
 interface UserCourseProgress {
   course_id: number;
   progress: number;
 }
+
 const StudyDetailsPage = async (props: {
   params: Promise<{ studyId: string }>;
 }) => {

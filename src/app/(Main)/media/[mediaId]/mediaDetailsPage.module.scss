@@ -87,6 +87,7 @@
 
 @media screen and (max-width: 900px) {
   .article {
+    flex-direction: column-reverse;
     &__navigation {
       width: 100%;
       margin-bottom: 30px;

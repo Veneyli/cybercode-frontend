@@ -37,7 +37,7 @@ const CreatePost: React.FC = () => {
         ...formData,
         isPublished: formData.isPublished === "true",
       });
-      router.push("/media");
+      router.push("admin/posts");
     } catch (e) {
       console.error("Ошибка при создании поста", e);
     } finally {
@@ -46,7 +46,7 @@ const CreatePost: React.FC = () => {
   };
 
   const handleCancel = () => {
-    router.push("/media");
+    router.push("admin/posts");
   };
 
   return (
@@ -102,8 +102,14 @@ const CreatePost: React.FC = () => {
         onChange={(e) => handleChange("category", e.target.value)}
       >
         <option value="">Выберите категорию</option>
-        <option value="news">Новости</option>
-        <option value="tech">Технологии</option>
+        <option value="Новости">Новости</option>
+        <option value="Технологии">Технологии</option>
+        <option value="Научные">Научные</option>
+        <option value="Программирование">Программирование</option>
+        <option value="Веб-разработка">Веб-разработка</option>
+        <option value="Дизайн">Дизайн</option>
+        <option value="Графика">Графика</option>
+        <option value="Гейм">Гейм</option>
       </Field>
 
       <Field

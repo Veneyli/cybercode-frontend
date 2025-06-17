@@ -9,6 +9,8 @@ import { UserService } from "@/shared/services/user.service";
 import Heading from "@/shared/ui/Heading/Heading";
 import { LectureService } from "@/shared/services/lecture.service";
 
+export const dynamic = "force-dynamic";
+
 interface UserCourseProgress {
   course_id: number;
   progress: number;

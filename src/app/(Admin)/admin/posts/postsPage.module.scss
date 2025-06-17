@@ -51,3 +51,10 @@
     right: 0;
   }
 }
+@media screen and (max-width: 1200px) {
+  .posts {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}

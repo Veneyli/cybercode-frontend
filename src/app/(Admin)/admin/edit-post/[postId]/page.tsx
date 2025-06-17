@@ -3,6 +3,8 @@ import styles from "./editPostPage.module.scss";
 import Heading from "@/shared/ui/Heading/Heading";
 import { MediaService } from "@/shared/services/media.service";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ postId: string }>;
 }

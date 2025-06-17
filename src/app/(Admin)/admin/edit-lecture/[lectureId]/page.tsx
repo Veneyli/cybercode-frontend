@@ -3,6 +3,8 @@ import styles from "./editLecture.module.scss";
 import Heading from "@/shared/ui/Heading/Heading";
 import { LectureService } from "@/shared/services/lecture.service";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ lectureId: string }>;
 }

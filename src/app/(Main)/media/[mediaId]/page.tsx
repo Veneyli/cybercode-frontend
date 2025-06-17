@@ -8,6 +8,8 @@ import { Media } from "@/types/media.types";
 import { JSDOM } from "jsdom";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Cybercode: Медиа",
   description: "Каталог медиа на платформе Cybercode",
@@ -64,7 +66,11 @@ const MediaDetailsPage = async (props: Props) => {
         <div className={styles.article__image}>
           <Image
             className={styles["article__image-file"]}
-            src={postData.image_url || "/images/placeholder.jpg"}
+            src={
+              postData.image_url
+                ? `${process.env.NEXT_PUBLIC_API_URL}${postData.image_url}`
+                : "/images/placeholder.jpeg"
+            }
             alt={postData.title}
             width={1000}
             height={600}

@@ -3,7 +3,7 @@
 .program {
   width: 100%;
   padding: 50px 0;
-  max-width: 1320px;
+  // max-width: 1320px;
   margin: 0 auto;
   &__title {
     margin-bottom: 30px;
@@ -88,9 +88,19 @@
           align-items: center;
           gap: 0.5rem;
           padding: 0.25rem 0;
-          font-size: 0.95rem;
+          font-size: 16px;
         }
       }
+    }
+  }
+}
+@media screen and (max-width: 1320px) {
+  .program {
+    &__title {
+      font-size: 24px;
+    }
+    &__content {
+      padding: 20px;
     }
   }
 }

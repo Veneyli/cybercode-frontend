@@ -4,6 +4,8 @@ import { UserService } from "@/shared/services/user.service";
 import UserTableClient from "@/widget/UserTableClient/UserTableClient";
 import type { User } from "@/shared/types/user.types";
 
+export const dynamic = "force-dynamic";
+
 const UsersPage = async () => {
   let users: User[] = [];
 

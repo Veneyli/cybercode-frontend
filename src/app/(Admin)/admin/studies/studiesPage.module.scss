@@ -69,3 +69,17 @@
     right: 0;
   }
 }
+@media screen and (max-width: 1200px) {
+  .studies {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .studies {
+    &__item {
+      flex-direction: column;
+    }
+  }
+}

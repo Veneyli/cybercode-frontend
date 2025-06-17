@@ -1,12 +1,13 @@
 import TestComponent from "@/widget/TestComponent/TestComponent";
 import styles from "./lecturePage.module.scss";
 import { LectureService } from "@/shared/services/lecture.service";
-
 import { FlexibleVideo } from "@/widget/Video/Video";
 import CodeEditor from "@/widget/CodeEditor/CodeEditor";
 import LectureBlock from "@/widget/LectureBlock/LectureBlock";
 import { TestService } from "@/shared/services/test.service";
 import { getServerSession } from "@/lib/getServerSession";
+
+export const dynamic = "force-dynamic";
 
 const LecturePage = async (props: {
   params: Promise<{ lectureId: string; studyId: string }>;
@@ -51,6 +52,7 @@ const LecturePage = async (props: {
       {lecture.type === "VIDEO" &&
         (lecture.video_url ? (
           <div>
+            <LectureBlock userId={user.user_id} lecture={lecture} />
             <FlexibleVideo
               userId={user.user_id}
               url={
@@ -60,7 +62,6 @@ const LecturePage = async (props: {
               }
               lectureId={lecture.lecture_id}
             />
-            <LectureBlock userId={user.user_id} lecture={lecture} />
           </div>
         ) : (
           <p>Видео еще не добавлено.</p>

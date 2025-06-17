@@ -94,6 +94,7 @@ const SidebarStudy: React.FC<SidebarProps> = ({
           ModuleService.moduleById(studyId),
           LectureService.lectureWithProgressByCourse(studyId, userId),
         ]);
+        modulesData.sort((a, b) => a.order - b.order);
         setCourse(courseData);
         setModules(modulesData);
         setLectures(lecturesData);
@@ -130,43 +131,47 @@ const SidebarStudy: React.FC<SidebarProps> = ({
         </div>
         <nav className={styles["navigation"]}>
           <div>
-            {modules?.map((module, moduleIndex) => {
-              const moduleLectures =
-                lectures
-                  ?.filter((lecture) => lecture.module_id === module.module_id)
-                  .sort((a, b) => a.order - b.order) || [];
+            {modules
+              .sort((a, b) => a.order - b.order)
+              .map((module, moduleIndex) => {
+                const moduleLectures =
+                  lectures
+                    ?.filter(
+                      (lecture) => lecture.module_id === module.module_id
+                    )
+                    .sort((a, b) => a.order - b.order) || [];
 
-              return (
-                <details
-                  key={module.module_id || `module-${moduleIndex}`}
-                  className={styles["navigation__details"]}
-                >
-                  <summary className={styles["navigation__details-title"]}>
-                    {`Модуль ${module.order}. ${module.title}`}
-                  </summary>
-                  <ul className={styles["navigation__list"]}>
-                    {moduleLectures.map((lecture) => (
-                      <li
-                        key={`${module.module_id || "default-module"}-${
-                          lecture.lecture_id
-                        }`}
-                        className={`${styles["navigation__item"]} ${
-                          !!lecture.userProgress ? styles["completed"] : ""
-                        }`}
-                      >
-                        <Link
-                          className={styles.navigation__link}
-                          href={`/study/${studyId}/lectures/${lecture.lecture_id}`}
+                return (
+                  <details
+                    key={module.module_id || `module-${moduleIndex}`}
+                    className={styles["navigation__details"]}
+                  >
+                    <summary className={styles["navigation__details-title"]}>
+                      {`Модуль ${module.order}. ${module.title}`}
+                    </summary>
+                    <ul className={styles["navigation__list"]}>
+                      {moduleLectures.map((lecture) => (
+                        <li
+                          key={`${module.module_id || "default-module"}-${
+                            lecture.lecture_id
+                          }`}
+                          className={`${styles["navigation__item"]} ${
+                            !!lecture.userProgress ? styles["completed"] : ""
+                          }`}
                         >
-                          {lectureTypeMap[lecture.type]?.icon}
-                          {`Лекция ${lecture.order}.  ${lecture.title}`}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              );
-            })}
+                          <Link
+                            className={styles.navigation__link}
+                            href={`/study/${studyId}/lectures/${lecture.lecture_id}`}
+                          >
+                            {lectureTypeMap[lecture.type]?.icon}
+                            {`Лекция ${lecture.order}.  ${lecture.title}`}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                );
+              })}
           </div>
         </nav>
       </div>
